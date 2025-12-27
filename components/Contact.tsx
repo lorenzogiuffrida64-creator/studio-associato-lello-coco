@@ -197,56 +197,31 @@ const Contact: React.FC = () => {
                   <button
                     disabled={status === 'submitting'}
                     type="submit"
-                    className="group mt-4 relative w-full py-5 bg-white text-black rounded-2xl font-bold flex items-center justify-center gap-3 overflow-visible transition-all hover:scale-[1.02] active:scale-95 disabled:opacity-70 disabled:scale-100"
+                    className="group mt-4 relative w-full py-5 bg-white text-black rounded-2xl font-bold flex items-center justify-center gap-3 transition-all hover:scale-[1.02] active:scale-95 disabled:opacity-70 disabled:scale-100 disabled:hover:shadow-none"
+                    style={{
+                      boxShadow: 'none'
+                    }}
+                    onMouseEnter={(e) => {
+                      if (status !== 'submitting') {
+                        e.currentTarget.style.boxShadow = '0 0 0 2px #a855f7, 0 0 20px rgba(168, 85, 247, 0.6)';
+                      }
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.boxShadow = 'none';
+                    }}
                   >
-                    {/* Animated Glowing Border */}
-                    <div className="absolute -inset-[2px] bg-gradient-to-r from-purple-500 via-pink-500 to-cyan-500 rounded-2xl opacity-0 group-hover:opacity-100 blur-sm transition-opacity duration-500 -z-10"
-                      style={{
-                        background: 'linear-gradient(90deg, #a855f7, #ec4899, #06b6d4, #a855f7)',
-                        backgroundSize: '300% 100%',
-                        animation: 'gradient-shift 3s ease infinite'
-                      }}
-                    ></div>
-
-                    {/* Outer Glow Effect */}
-                    <div className="absolute -inset-1 bg-gradient-to-r from-purple-600 via-pink-600 to-cyan-600 rounded-2xl opacity-0 group-hover:opacity-60 blur-xl transition-opacity duration-500 -z-20"></div>
-
-                    {/* Inner Shine Effect */}
-                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl"
-                      style={{
-                        backgroundSize: '200% 100%',
-                        animation: 'shine 2s ease infinite'
-                      }}
-                    ></div>
-
-                    {/* Button Content */}
-                    <div className="relative z-10 flex items-center gap-3">
-                      {status === 'submitting' ? (
-                        <>
-                          <Loader2 className="w-5 h-5 animate-spin" />
-                          <span>Invio in corso...</span>
-                        </>
-                      ) : (
-                        <>
-                          <span>Invia Messaggio</span>
-                          <Send className="w-5 h-5 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
-                        </>
-                      )}
-                    </div>
+                    {status === 'submitting' ? (
+                      <>
+                        <Loader2 className="w-5 h-5 animate-spin" />
+                        <span>Invio in corso...</span>
+                      </>
+                    ) : (
+                      <>
+                        <span>Invia Messaggio</span>
+                        <Send className="w-5 h-5 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
+                      </>
+                    )}
                   </button>
-
-                  <style>{`
-                    @keyframes gradient-shift {
-                      0% { background-position: 0% 50%; }
-                      50% { background-position: 100% 50%; }
-                      100% { background-position: 0% 50%; }
-                    }
-
-                    @keyframes shine {
-                      0% { background-position: -200% 0; }
-                      100% { background-position: 200% 0; }
-                    }
-                  `}</style>
                 </form>
               )}
             </div>
