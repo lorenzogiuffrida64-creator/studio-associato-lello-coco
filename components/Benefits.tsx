@@ -1,32 +1,32 @@
 
 import React from 'react';
-import { ShieldCheck, Target, Zap, TrendingUp, Users } from 'lucide-react';
+import { Calculator, ShieldCheck, FileText, TrendingUp, Users } from 'lucide-react';
 
 const benefits = [
   {
+    icon: Calculator,
+    title: "Dottori Commercialisti",
+    description: "Professionisti iscritti all'Albo dei Dottori Commercialisti per la gestione completa della contabilità aziendale e degli adempimenti fiscali."
+  },
+  {
     icon: ShieldCheck,
-    title: "Sicurezza Fiscale",
-    description: "Gestiamo ogni adempimento con precisione millimetrica per garantirti la massima serenità."
+    title: "Revisori Legali",
+    description: "Servizi di revisione legale dei conti e certificazione dei bilanci, garantendo conformità normativa e trasparenza contabile."
   },
   {
-    icon: Target,
-    title: "Strategia Mirata",
-    description: "Analizziamo il tuo business per ottimizzare il carico fiscale legalmente e strategicamente."
-  },
-  {
-    icon: Zap,
-    title: "Efficienza Digitale",
-    description: "Sistemi all'avanguardia per una gestione fluida e trasparente della tua contabilità."
+    icon: FileText,
+    title: "Consulenza Contabile",
+    description: "Gestione della contabilità ordinaria e semplificata, redazione bilanci, analisi di bilancio e supporto nelle scelte gestionali."
   },
   {
     icon: TrendingUp,
-    title: "Crescita Sostenibile",
-    description: "Al fianco delle imprese catanesi per supportare ogni fase di sviluppo aziendale."
+    title: "Consulenza Fiscale",
+    description: "Pianificazione fiscale, dichiarazioni dei redditi, assistenza in caso di verifiche e accertamenti fiscali per persone fisiche e giuridiche."
   },
   {
     icon: Users,
-    title: "Consulenza Diretta",
-    description: "Un rapporto umano e professionale. Siamo il partner che parla la tua lingua."
+    title: "Consulenza Tributaria",
+    description: "Ottimizzazione del carico tributario, gestione del contenzioso tributario e assistenza nelle operazioni straordinarie d'impresa."
   }
 ];
 
@@ -36,10 +36,10 @@ const Benefits: React.FC = () => {
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-24">
           <h2 className="text-4xl md:text-6xl font-serif mb-6">
-            Basta Sprecare Ore Dietro alla <br /> <span className="italic text-white/60">Burocrazia Fiscale</span>
+            I Nostri <br /> <span className="italic text-white/60">Servizi Professionali</span>
           </h2>
           <p className="text-white/40 max-w-2xl mx-auto">
-            Lo Studio Giuliano ti aiuta ad automatizzare e ottimizzare i tuoi processi fiscali così puoi concentrarti solo sulla crescita della tua attività.
+            Studio di consulenza contabile, fiscale e tributaria con professionisti qualificati al servizio delle imprese e dei privati.
           </p>
         </div>
 
