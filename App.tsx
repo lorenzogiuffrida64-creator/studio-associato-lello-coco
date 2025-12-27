@@ -3,13 +3,14 @@ import React, { useEffect, useState } from 'react';
 import Header from './components/Header';
 import Hero from './components/Hero';
 import About from './components/About';
+import Services from './components/Services';
 import Benefits from './components/Benefits';
 import Testimonials from './components/Testimonials';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 import BackgroundEffects from './components/BackgroundEffects';
 
-export type View = 'home' | 'about';
+export type View = 'home' | 'about' | 'services';
 
 const App: React.FC = () => {
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
@@ -26,7 +27,7 @@ const App: React.FC = () => {
   // Gestore della navigazione che assicura lo scroll corretto se torniamo in home
   const handleNavigate = (targetView: View, anchor?: string) => {
     setView(targetView);
-    if (targetView === 'about' || !anchor) {
+    if (targetView === 'about' || targetView === 'services' || !anchor) {
       window.scrollTo({ top: 0, behavior: 'smooth' });
     } else if (anchor) {
       // Piccolo timeout per permettere al DOM della Home di renderizzarsi prima dello scroll
@@ -58,11 +59,15 @@ const App: React.FC = () => {
                 <Contact />
               </div>
             </>
-          ) : (
+          ) : view === 'about' ? (
             <div className="pt-20"> {/* Padding extra per compensare l'header fisso */}
               <About />
             </div>
-          )}
+          ) : view === 'services' ? (
+            <div className="pt-20"> {/* Padding extra per compensare l'header fisso */}
+              <Services />
+            </div>
+          ) : null}
         </main>
 
         <Footer onNavigate={handleNavigate} />

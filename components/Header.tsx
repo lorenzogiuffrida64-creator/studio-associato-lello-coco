@@ -25,7 +25,7 @@ const Header: React.FC<HeaderProps> = ({ currentView, onNavigate }) => {
 
   const navItems = [
     { name: 'Chi Siamo', view: 'about' as View, anchor: undefined },
-    { name: 'Servizi', view: 'home' as View, anchor: '#benefits' },
+    { name: 'Servizi', view: 'services' as View, anchor: undefined },
     { name: 'Testimonial', view: 'home' as View, anchor: '#testimonials' },
     { name: 'Contatti', view: 'home' as View, anchor: '#contatti' }
   ];

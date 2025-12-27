@@ -77,7 +77,7 @@ const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center pt-12 border-t border-white/10 gap-8">
           <div className="flex flex-col gap-2 cursor-pointer" onClick={() => onNavigate('home')}>
             <span className="font-serif text-3xl italic">Giuliano Lello Coco</span>
-            <span className="text-sm text-white/30">© 2024 Studio Associato. Tutti i diritti riservati.</span>
+            <span className="text-sm text-white/30">© 2025 Studio Associato. Tutti i diritti riservati.</span>
           </div>
           
           <div className="flex flex-wrap gap-x-12 gap-y-4 text-sm font-medium">
