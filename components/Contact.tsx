@@ -60,7 +60,7 @@ const Contact: React.FC = () => {
                 </div>
                 <div>
                   <p className="text-sm uppercase tracking-widest text-white/30 font-bold mb-1">Dove Siamo</p>
-                  <p className="text-white/80 font-medium">Viale Vittorio Veneto 12, Catania (CT)</p>
+                  <p className="text-white/80 font-medium">Via Asiago, 38, 95127 Catania CT</p>
                 </div>
               </div>
 

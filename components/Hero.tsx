@@ -6,7 +6,7 @@ const images = [
   {
     url: "https://images.unsplash.com/photo-1554232456-8727aae0cfa4?q=80&w=1000&auto=format&fit=crop",
     label: "Sede Principale",
-    location: "Catania, Viale Vittorio Veneto"
+    location: "Via Asiago 38, Catania"
   },
   {
     url: "https://images.unsplash.com/photo-1521791136064-7986c2959210?q=80&w=1000&auto=format&fit=crop",

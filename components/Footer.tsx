@@ -52,7 +52,7 @@ const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
         </div>
         
         <div className="text-center mt-12">
-          <p className="text-[10px] uppercase tracking-[0.5em] text-white/10">Catania • Viale Vittorio Veneto • Italia</p>
+          <p className="text-[10px] uppercase tracking-[0.5em] text-white/10">Catania • Via Asiago 38 • Italia</p>
         </div>
       </div>
     </footer>
