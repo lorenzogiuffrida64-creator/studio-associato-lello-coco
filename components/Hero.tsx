@@ -89,15 +89,27 @@ const Hero: React.FC = () => {
           </p>
 
           <div className="flex flex-col sm:flex-row flex-wrap gap-3 md:gap-4 pt-4 w-full sm:w-auto">
-            <button className="group relative px-6 md:px-8 py-3 md:py-4 bg-white text-black rounded-2xl font-bold flex items-center justify-center gap-2 overflow-hidden transition-all duration-500 hover:scale-105 hover:shadow-[0_0_30px_rgba(168,85,247,0.4)] w-full sm:w-auto">
+            <button
+              onClick={() => {
+                const el = document.querySelector('#servizi');
+                if (el) el.scrollIntoView({ behavior: 'smooth' });
+              }}
+              className="group relative px-6 md:px-8 py-3 md:py-4 bg-white text-black rounded-2xl font-bold flex items-center justify-center gap-2 overflow-hidden transition-all duration-500 hover:scale-105 hover:shadow-[0_0_30px_rgba(168,85,247,0.4)] w-full sm:w-auto"
+            >
               <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">
                 <div className="border-beam-active"></div>
               </div>
               <span className="relative z-10 text-sm md:text-base">Esplora i Servizi</span>
               <ArrowUpRight className="relative z-10 w-4 md:w-5 h-4 md:h-5 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
             </button>
-            <button className="px-6 md:px-8 py-3 md:py-4 rounded-2xl border border-white/10 glass text-white font-bold transition-all hover:bg-white/5 hover:border-white/20 text-sm md:text-base w-full sm:w-auto">
-              Il Nostro Metodo
+            <button
+              onClick={() => {
+                const el = document.querySelector('#contatti');
+                if (el) el.scrollIntoView({ behavior: 'smooth' });
+              }}
+              className="px-6 md:px-8 py-3 md:py-4 rounded-2xl border border-white/10 glass text-white font-bold transition-all hover:bg-white/5 hover:border-white/20 text-sm md:text-base w-full sm:w-auto"
+            >
+              Contattaci
             </button>
           </div>
           </div>

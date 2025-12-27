@@ -25,7 +25,7 @@ const Header: React.FC<HeaderProps> = ({ currentView, onNavigate }) => {
 
   const navItems = [
     { name: 'Chi Siamo', view: 'about' as View, anchor: undefined },
-    { name: 'Servizi', view: 'services' as View, anchor: undefined },
+    { name: 'Servizi', view: 'home' as View, anchor: '#servizi' },
     { name: 'Testimonial', view: 'home' as View, anchor: '#testimonials' },
     { name: 'Contatti', view: 'home' as View, anchor: '#contatti' }
   ];
@@ -36,8 +36,9 @@ const Header: React.FC<HeaderProps> = ({ currentView, onNavigate }) => {
   };
 
   return (
+    <>
     <header className="fixed top-0 left-0 right-0 z-50 flex justify-center p-3 md:p-4 lg:p-6">
-      <nav className={`glass rounded-[20px] md:rounded-[28px] lg:rounded-full w-full max-w-7xl px-4 sm:px-5 md:px-6 lg:px-8 py-2.5 md:py-3 flex items-center justify-between md:justify-start gap-4 md:gap-8 lg:gap-12 border border-white/5 transition-all duration-500 ${isOpen ? 'bg-transparent border-transparent' : ''}`}>
+      <nav className={`glass rounded-[20px] md:rounded-[28px] lg:rounded-full w-full max-w-7xl px-4 sm:px-5 md:px-6 lg:px-8 py-2.5 md:py-3 flex items-center justify-between md:justify-start gap-4 md:gap-8 lg:gap-12 border border-white/5 transition-all duration-500 ${isOpen ? 'opacity-0 md:opacity-100' : 'opacity-100'}`}>
 
         {/* Logo */}
         <div
@@ -86,17 +87,43 @@ const Header: React.FC<HeaderProps> = ({ currentView, onNavigate }) => {
           className="md:hidden relative z-[70] p-1.5 md:p-2 text-white/80 hover:text-white transition-colors"
           aria-label="Toggle Menu"
         >
-          {isOpen ? <X className="w-5 h-5 md:w-6 md:h-6" /> : <Menu className="w-5 h-5 md:w-6 md:h-6" />}
+          <Menu className="w-5 h-5 md:w-6 md:h-6" />
         </button>
+      </nav>
+    </header>
 
-        {/* Mobile Menu Overlay */}
-        <div
-          className={`fixed inset-0 bg-[#050505] z-[60] md:hidden flex flex-col items-center justify-center transition-all duration-500 ease-in-out ${
-            isOpen ? 'opacity-100 visible translate-y-0' : 'opacity-0 invisible -translate-y-4 pointer-events-none'
-          }`}
-        >
-          {/* Background Gradient for Mobile */}
-          <div className="absolute inset-0 bg-gradient-to-b from-purple-900/10 via-transparent to-black pointer-events-none"></div>
+      {/* Mobile Menu Overlay - Separate from header */}
+      <div
+        className={`fixed inset-0 bg-[#050505] z-[80] md:hidden flex flex-col transition-all duration-500 ease-in-out ${
+          isOpen ? 'opacity-100 visible' : 'opacity-0 invisible pointer-events-none'
+        }`}
+      >
+        {/* Mobile Menu Header */}
+        <div className="fixed top-0 left-0 right-0 z-[90] flex justify-between items-center p-4">
+          <div
+            className="flex items-center gap-1.5 cursor-pointer group"
+            onClick={() => {
+              onNavigate('home');
+              setIsOpen(false);
+            }}
+          >
+            <div className="w-7 h-7 rounded-lg bg-gradient-to-br from-purple-400 to-indigo-600 transition-transform duration-500 group-hover:rotate-12 flex-shrink-0"></div>
+            <span className="font-medium tracking-tight text-xs uppercase opacity-90 whitespace-nowrap">Studio Giuliano</span>
+          </div>
+          <button
+            onClick={() => setIsOpen(false)}
+            className="p-2 text-white/80 hover:text-white transition-colors"
+            aria-label="Close Menu"
+          >
+            <X className="w-6 h-6" />
+          </button>
+        </div>
+
+        {/* Background Gradient for Mobile */}
+        <div className="absolute inset-0 bg-gradient-to-b from-purple-900/10 via-transparent to-black pointer-events-none"></div>
+
+        {/* Menu Content */}
+        <div className="flex-1 flex flex-col items-center justify-center pb-20">
 
           <ul className="flex flex-col items-center gap-6 sm:gap-8 text-center relative z-10 px-6">
             {navItems.map((item, idx) => (
@@ -138,11 +165,12 @@ const Header: React.FC<HeaderProps> = ({ currentView, onNavigate }) => {
             </button>
           </div>
 
-          {/* Background Decorative Element for Mobile Menu */}
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80vw] h-[80vw] max-w-md max-h-md bg-purple-600/5 rounded-full blur-[100px] pointer-events-none"></div>
         </div>
-      </nav>
-    </header>
+
+        {/* Background Decorative Element for Mobile Menu */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80vw] h-[80vw] max-w-md max-h-md bg-purple-600/5 rounded-full blur-[100px] pointer-events-none"></div>
+      </div>
+    </>
   );
 };
 

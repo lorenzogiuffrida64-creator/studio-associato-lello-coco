@@ -49,7 +49,7 @@ const App: React.FC = () => {
           {view === 'home' ? (
             <>
               <Hero />
-              <div id="benefits">
+              <div id="servizi">
                 <Benefits />
               </div>
               <div id="testimonials">
