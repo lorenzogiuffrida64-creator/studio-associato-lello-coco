@@ -1,0 +1,7 @@
+{
+  "name": "Studio Associato Giuliano Lello Coco",
+  "description": "Sito web professionale per uno studio di consulenza fiscale e tributaria a Catania, con un design moderno e interattivo.",
+  "requestFramePermissions": [
+    "microphone"
+  ]
+}
