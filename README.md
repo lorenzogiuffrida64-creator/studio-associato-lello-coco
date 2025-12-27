@@ -110,7 +110,7 @@ studio-associato-giuliano-lello-coco/
 Located in `/components/Contact.tsx` (lines 63, 73, 83):
 - **Address:** Viale Vittorio Veneto 12, Catania (CT)
 - **Email:** studiocomgls@tiscali.it
-- **Phone:** +39 095 123 4567
+- **Phone:** +39 095 444183
 
 Please update these with your actual studio contact information before going live.
 
