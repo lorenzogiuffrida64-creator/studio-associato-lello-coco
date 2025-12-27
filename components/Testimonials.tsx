@@ -10,8 +10,8 @@ const reviews = [
     text: "La precisione dello Studio Giuliano è fondamentale per la nostra crescita. Un partner affidabile in ogni sfida fiscale."
   },
   {
-    client: "Catania Gourmet",
-    name: "Elena Bianchi",
+    client: "Catania con Gusto",
+    name: "Joe Giuffrida",
     score: 5.0,
     text: "Hanno semplificato completamente la nostra gestione contabile. Finalmente dormiamo sonni tranquilli."
   },
