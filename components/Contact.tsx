@@ -2,6 +2,9 @@
 import React, { useState } from 'react';
 import { Send, CheckCircle2, Loader2, MapPin, Mail, Phone } from 'lucide-react';
 
+// TODO: Replace with your Google Apps Script Web App URL
+const GOOGLE_SCRIPT_URL = 'YOUR_GOOGLE_SCRIPT_URL_HERE';
+
 const Contact: React.FC = () => {
   const [formData, setFormData] = useState({
     name: '',
@@ -9,28 +12,41 @@ const Contact: React.FC = () => {
     subject: '',
     message: ''
   });
-  const [status, setStatus] = useState<'idle' | 'submitting' | 'success'>('idle');
+  const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setStatus('submitting');
 
-    // Simula il caricamento dell'invio
-    await new Promise(resolve => setTimeout(resolve, 1500));
+    try {
+      // Send to Google Sheets
+      const response = await fetch(GOOGLE_SCRIPT_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData)
+      });
 
-    // Salva nel localStorage
-    const existingSubmissions = JSON.parse(localStorage.getItem('studio_giuliano_contatti') || '[]');
-    const newSubmission = {
-      ...formData,
-      timestamp: new Date().toISOString()
-    };
-    localStorage.setItem('studio_giuliano_contatti', JSON.stringify([...existingSubmissions, newSubmission]));
+      // Also save to localStorage as backup
+      const existingSubmissions = JSON.parse(localStorage.getItem('studio_giuliano_contatti') || '[]');
+      const newSubmission = {
+        ...formData,
+        timestamp: new Date().toISOString()
+      };
+      localStorage.setItem('studio_giuliano_contatti', JSON.stringify([...existingSubmissions, newSubmission]));
 
-    setStatus('success');
-    setFormData({ name: '', email: '', subject: '', message: '' });
+      setStatus('success');
+      setFormData({ name: '', email: '', subject: '', message: '' });
 
-    // Torna allo stato idle dopo 5 secondi
-    setTimeout(() => setStatus('idle'), 5000);
+      // Torna allo stato idle dopo 5 secondi
+      setTimeout(() => setStatus('idle'), 5000);
+    } catch (error) {
+      console.error('Error submitting form:', error);
+      setStatus('error');
+      setTimeout(() => setStatus('idle'), 5000);
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -100,11 +116,27 @@ const Contact: React.FC = () => {
                   <p className="text-white/40 max-w-xs">
                     Grazie per averci contattato. Ti risponderemo entro le prossime 24 ore lavorative.
                   </p>
-                  <button 
+                  <button
                     onClick={() => setStatus('idle')}
                     className="mt-8 text-sm font-bold uppercase tracking-widest opacity-40 hover:opacity-100 transition-opacity"
                   >
                     Invia un altro messaggio
+                  </button>
+                </div>
+              ) : status === 'error' ? (
+                <div className="flex flex-col items-center justify-center py-12 text-center animate-in fade-in zoom-in duration-500">
+                  <div className="w-20 h-20 rounded-full bg-red-500/10 flex items-center justify-center mb-6">
+                    <span className="text-4xl">⚠️</span>
+                  </div>
+                  <h3 className="text-2xl font-bold mb-4">Errore di Invio</h3>
+                  <p className="text-white/40 max-w-xs">
+                    Si è verificato un problema. Per favore riprova o contattaci direttamente via email.
+                  </p>
+                  <button
+                    onClick={() => setStatus('idle')}
+                    className="mt-8 text-sm font-bold uppercase tracking-widest opacity-40 hover:opacity-100 transition-opacity"
+                  >
+                    Riprova
                   </button>
                 </div>
               ) : (
