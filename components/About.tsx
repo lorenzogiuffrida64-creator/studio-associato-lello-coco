@@ -69,48 +69,48 @@ const About: React.FC = () => {
   }, [selectedPartner]);
 
   return (
-    <section className="py-20 lg:py-32 px-6 relative overflow-hidden min-h-screen">
+    <section className="py-16 md:py-24 lg:py-32 px-4 md:px-6 relative overflow-hidden min-h-screen">
       <div className="max-w-7xl mx-auto">
 
         {/* Story Section */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center mb-40">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 lg:gap-20 items-center mb-20 md:mb-32 lg:mb-40">
           <ScrollAnimation direction="left" delay={0.1}>
           <div className="relative order-2 lg:order-1">
-            <div className="relative z-10 rounded-[40px] overflow-hidden border border-white/10 aspect-[4/5] lg:aspect-square">
-              <img 
-                src="https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=1000&auto=format&fit=crop" 
-                alt="Studio Interno" 
+            <div className="relative z-10 rounded-[28px] md:rounded-[36px] lg:rounded-[40px] overflow-hidden border border-white/10 aspect-[4/5] lg:aspect-square">
+              <img
+                src="https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=1000&auto=format&fit=crop"
+                alt="Studio Interno"
                 className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-1000"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
             </div>
             {/* Floating Badge */}
-            <div className="absolute -bottom-10 -right-10 glass p-8 rounded-3xl border-white/10 z-20 hidden md:block animate-float">
-              <p className="text-4xl font-serif text-purple-400 mb-1">25+</p>
-              <p className="text-xs uppercase tracking-widest text-white/50 font-bold">Anni di Esperienza</p>
+            <div className="absolute -bottom-6 md:-bottom-10 -right-4 md:-right-10 glass p-4 md:p-6 lg:p-8 rounded-2xl md:rounded-3xl border-white/10 z-20 animate-float">
+              <p className="text-2xl md:text-3xl lg:text-4xl font-serif text-purple-400 mb-0.5 md:mb-1">25+</p>
+              <p className="text-[9px] md:text-[10px] lg:text-xs uppercase tracking-wider md:tracking-widest text-white/50 font-bold">Anni di Esperienza</p>
             </div>
           </div>
           </ScrollAnimation>
 
           <ScrollAnimation direction="right" delay={0.1}>
-          <div className="flex flex-col gap-8 order-1 lg:order-2">
-            <div className="inline-flex items-center gap-2 text-purple-400 text-sm font-bold uppercase tracking-[0.3em]">
-              <span className="w-12 h-[1px] bg-purple-400/30"></span>
+          <div className="flex flex-col gap-6 md:gap-8 order-1 lg:order-2">
+            <div className="inline-flex items-center gap-2 text-purple-400 text-xs md:text-sm font-bold uppercase tracking-wider md:tracking-[0.3em]">
+              <span className="w-8 md:w-12 h-[1px] bg-purple-400/30"></span>
               La Nostra Storia
             </div>
-            <h2 className="text-5xl md:text-7xl font-serif leading-tight">
+            <h2 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-serif leading-tight">
               Radici a <span className="italic">Catania</span>,<br />visione nazionale.
             </h2>
-            <p className="text-white/50 text-xl leading-relaxed">
-              Fondato oltre vent'anni fa, lo Studio Associato Giuliano Lello Coco nasce dalla volontà di offrire un porto sicuro alle imprese del territorio siciliano. 
+            <p className="text-white/50 text-base md:text-lg lg:text-xl leading-relaxed">
+              Fondato oltre vent'anni fa, lo Studio Associato Giuliano Lello Coco nasce dalla volontà di offrire un porto sicuro alle imprese del territorio siciliano.
               Non siamo solo commercialisti; siamo consulenti strategici che comprendono le sfide del fare impresa oggi.
             </p>
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 pt-8">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 md:gap-8 pt-4 md:pt-8">
               {values.map((val, i) => (
-                <div key={i} className="flex flex-col gap-4">
-                  <val.icon className="w-6 h-6 text-purple-400/60" />
-                  <h4 className="font-bold text-white/90">{val.title}</h4>
-                  <p className="text-sm text-white/30">{val.text}</p>
+                <div key={i} className="flex flex-col gap-3 md:gap-4">
+                  <val.icon className="w-5 h-5 md:w-6 md:h-6 text-purple-400/60" />
+                  <h4 className="font-bold text-sm md:text-base text-white/90">{val.title}</h4>
+                  <p className="text-xs md:text-sm text-white/30">{val.text}</p>
                 </div>
               ))}
             </div>
@@ -120,22 +120,22 @@ const About: React.FC = () => {
 
         <ScrollAnimation direction="up" delay={0.1}>
         {/* Partners Section */}
-        <div className="text-center mb-20">
-          <h3 className="text-4xl md:text-6xl font-serif mb-6">I Professionisti</h3>
-          <p className="text-white/40 max-w-xl mx-auto">
+        <div className="text-center mb-12 md:mb-16 lg:mb-20">
+          <h3 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif mb-4 md:mb-6">I Professionisti</h3>
+          <p className="text-white/40 max-w-xl mx-auto text-sm md:text-base px-4">
             Un team multidisciplinare pronto ad affrontare ogni complessità del sistema tributario italiano.
           </p>
         </div>
         </ScrollAnimation>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-20">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 lg:gap-8 mb-12 md:mb-16 lg:mb-20">
           {partners.map((partner, idx) => (
             <ScrollAnimation key={idx} direction="up" delay={idx * 0.15}>
             <div
               className="group relative cursor-pointer"
               onClick={() => setSelectedPartner(idx)}
             >
-              <div className="relative h-[450px] rounded-[40px] overflow-hidden border border-white/5 bg-zinc-900 transition-all duration-500 group-hover:border-purple-500/30 group-hover:scale-[1.02]">
+              <div className="relative h-[350px] md:h-[400px] lg:h-[450px] rounded-[28px] md:rounded-[36px] lg:rounded-[40px] overflow-hidden border border-white/5 bg-zinc-900 transition-all duration-500 group-hover:border-purple-500/30 group-hover:scale-[1.02]">
                 <img
                   src={partner.img}
                   alt={partner.name}
@@ -143,17 +143,17 @@ const About: React.FC = () => {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent"></div>
 
-                <div className="absolute bottom-0 left-0 right-0 p-8 transform transition-transform duration-500">
-                  <p className="text-xs uppercase tracking-[0.2em] text-purple-400 font-bold mb-2">{partner.role}</p>
-                  <h4 className="text-2xl font-serif text-white mb-2">{partner.name}</h4>
-                  <div className="h-0 group-hover:h-8 overflow-hidden transition-all duration-500 opacity-0 group-hover:opacity-100">
-                    <p className="text-sm text-white/60">Clicca per saperne di più →</p>
+                <div className="absolute bottom-0 left-0 right-0 p-5 md:p-6 lg:p-8 transform transition-transform duration-500">
+                  <p className="text-[10px] md:text-xs uppercase tracking-wider md:tracking-[0.2em] text-purple-400 font-bold mb-1.5 md:mb-2">{partner.role}</p>
+                  <h4 className="text-xl md:text-2xl font-serif text-white mb-1.5 md:mb-2">{partner.name}</h4>
+                  <div className="h-0 group-hover:h-6 md:group-hover:h-8 overflow-hidden transition-all duration-500 opacity-0 group-hover:opacity-100">
+                    <p className="text-xs md:text-sm text-white/60">Clicca per saperne di più →</p>
                   </div>
                 </div>
 
                 {/* Click indicator */}
-                <div className="absolute top-6 right-6 w-10 h-10 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-                  <span className="text-white text-sm">+</span>
+                <div className="absolute top-4 md:top-6 right-4 md:right-6 w-8 h-8 md:w-10 md:h-10 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                  <span className="text-white text-xs md:text-sm">+</span>
                 </div>
               </div>
             </div>

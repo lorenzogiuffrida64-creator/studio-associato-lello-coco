@@ -142,7 +142,7 @@ const Services: React.FC = () => {
   }, []);
 
   return (
-    <section className="relative min-h-screen py-20 lg:py-32 px-6 overflow-hidden">
+    <section className="relative min-h-screen py-16 md:py-24 lg:py-32 px-4 md:px-6 overflow-hidden">
       {/* Animated Gradient Background */}
       <div className="absolute inset-0 bg-gradient-to-br from-purple-900/10 via-indigo-900/5 to-transparent animate-gradient-shift"></div>
 
@@ -191,57 +191,57 @@ const Services: React.FC = () => {
       <div className="max-w-7xl mx-auto relative z-10">
         <ScrollAnimation direction="up" delay={0.1}>
         {/* Header Section */}
-        <div className="text-center mb-20">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass border border-white/10 w-fit mb-8 mx-auto">
+        <div className="text-center mb-12 md:mb-16 lg:mb-20">
+          <div className="inline-flex items-center gap-2 px-3 md:px-4 py-1.5 rounded-full glass border border-white/10 w-fit mb-6 md:mb-8 mx-auto">
             <span className="relative flex h-2 w-2">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-purple-400 opacity-75"></span>
               <span className="relative inline-flex rounded-full h-2 w-2 bg-purple-500"></span>
             </span>
-            <span className="text-xs font-medium text-purple-100/80 uppercase tracking-wider">I Nostri Servizi</span>
+            <span className="text-[10px] md:text-xs font-medium text-purple-100/80 uppercase tracking-wider">I Nostri Servizi</span>
           </div>
 
-          <h1 className="text-5xl md:text-7xl lg:text-8xl font-serif leading-tight mb-8">
+          <h1 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl xl:text-8xl font-serif leading-tight mb-6 md:mb-8 px-4">
             <span className="font-serif">Soluzioni</span> <span className="italic text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-pink-400 to-purple-400">Professionali</span>
             <br />
             <span className="text-white/60">per ogni esigenza</span>
           </h1>
 
-          <p className="text-xl text-white/50 max-w-3xl mx-auto leading-relaxed">
+          <p className="text-sm md:text-lg lg:text-xl text-white/50 max-w-3xl mx-auto leading-relaxed px-4">
             Dal dottore commercialista al revisore legale, dalla consulenza contabile a quella tributaria.
-            <br />Un team di professionisti qualificati al servizio della tua impresa.
+            <br className="hidden sm:block" />Un team di professionisti qualificati al servizio della tua impresa.
           </p>
         </div>
         </ScrollAnimation>
 
         {/* Services Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-20">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8 mb-12 md:mb-16 lg:mb-20">
           {services.map((service, idx) => (
             <ScrollAnimation key={idx} direction="up" delay={idx * 0.1}>
             <div
-              className="group relative glass rounded-[40px] p-8 md:p-10 border border-white/5 hover:border-white/20 transition-all duration-700 hover:scale-[1.02] cursor-pointer"
+              className="group relative glass rounded-[28px] md:rounded-[36px] lg:rounded-[40px] p-6 md:p-8 lg:p-10 border border-white/5 hover:border-white/20 transition-all duration-700 hover:scale-[1.02] cursor-pointer"
               onClick={() => setSelectedService(selectedService === idx ? null : idx)}
             >
               {/* Gradient Accent */}
-              <div className={`absolute -inset-0.5 bg-gradient-to-r ${service.color} opacity-0 group-hover:opacity-10 rounded-[40px] blur-xl transition-opacity duration-700`}></div>
+              <div className={`absolute -inset-0.5 bg-gradient-to-r ${service.color} opacity-0 group-hover:opacity-10 rounded-[28px] md:rounded-[36px] lg:rounded-[40px] blur-xl transition-opacity duration-700`}></div>
 
               <div className="relative z-10">
                 {/* Icon */}
-                <div className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${service.color} flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-500`}>
-                  <service.icon className="w-8 h-8 text-white" />
+                <div className={`w-12 h-12 md:w-14 md:h-14 lg:w-16 lg:h-16 rounded-xl md:rounded-2xl bg-gradient-to-br ${service.color} flex items-center justify-center mb-4 md:mb-5 lg:mb-6 group-hover:scale-110 transition-transform duration-500`}>
+                  <service.icon className="w-6 h-6 md:w-7 md:h-7 lg:w-8 lg:h-8 text-white" />
                 </div>
 
                 {/* Title & Tagline */}
-                <div className="mb-6">
-                  <h3 className="text-3xl font-serif mb-2 group-hover:text-purple-200 transition-colors duration-300">
+                <div className="mb-4 md:mb-5 lg:mb-6">
+                  <h3 className="text-xl md:text-2xl lg:text-3xl font-serif mb-1.5 md:mb-2 group-hover:text-purple-200 transition-colors duration-300">
                     {service.title}
                   </h3>
-                  <p className="text-sm uppercase tracking-widest text-purple-400/60 font-bold">
+                  <p className="text-[10px] md:text-xs uppercase tracking-wider md:tracking-widest text-purple-400/60 font-bold">
                     {service.tagline}
                   </p>
                 </div>
 
                 {/* Description */}
-                <p className="text-white/60 leading-relaxed mb-6 group-hover:text-white/80 transition-colors duration-300">
+                <p className="text-sm md:text-base text-white/60 leading-relaxed mb-4 md:mb-5 lg:mb-6 group-hover:text-white/80 transition-colors duration-300">
                   {service.description}
                 </p>
 
@@ -251,24 +251,24 @@ const Services: React.FC = () => {
                     selectedService === idx ? 'max-h-[500px] opacity-100' : 'max-h-0 opacity-0'
                   }`}
                 >
-                  <div className="space-y-3 pt-6 border-t border-white/10">
-                    <h4 className="text-sm font-bold uppercase tracking-wider text-purple-300 mb-4">
+                  <div className="space-y-2.5 md:space-y-3 pt-4 md:pt-6 border-t border-white/10">
+                    <h4 className="text-xs md:text-sm font-bold uppercase tracking-wider text-purple-300 mb-3 md:mb-4">
                       Cosa Include
                     </h4>
                     {service.features.map((feature, i) => (
-                      <div key={i} className="flex items-start gap-3">
-                        <CheckCircle className="w-5 h-5 text-purple-400 flex-shrink-0 mt-0.5" />
-                        <span className="text-white/70 text-sm leading-relaxed">{feature}</span>
+                      <div key={i} className="flex items-start gap-2 md:gap-3">
+                        <CheckCircle className="w-4 h-4 md:w-5 md:h-5 text-purple-400 flex-shrink-0 mt-0.5" />
+                        <span className="text-white/70 text-xs md:text-sm leading-relaxed">{feature}</span>
                       </div>
                     ))}
                   </div>
                 </div>
 
                 {/* Expand Indicator */}
-                <button className="mt-6 flex items-center gap-2 text-sm font-bold uppercase tracking-wider text-purple-400 hover:text-purple-300 transition-colors">
+                <button className="mt-4 md:mt-6 flex items-center gap-2 text-xs md:text-sm font-bold uppercase tracking-wider text-purple-400 hover:text-purple-300 transition-colors">
                   <span>{selectedService === idx ? 'Mostra meno' : 'Scopri di più'}</span>
                   <ArrowRight
-                    className={`w-4 h-4 transition-transform duration-300 ${
+                    className={`w-3.5 h-3.5 md:w-4 md:h-4 transition-transform duration-300 ${
                       selectedService === idx ? 'rotate-90' : ''
                     }`}
                   />
@@ -281,20 +281,20 @@ const Services: React.FC = () => {
 
         <ScrollAnimation direction="up" delay={0.2}>
         {/* CTA Section */}
-        <div className="glass rounded-[50px] p-12 md:p-20 text-center relative overflow-hidden">
+        <div className="glass rounded-[32px] md:rounded-[40px] lg:rounded-[50px] p-8 md:p-12 lg:p-20 text-center relative overflow-hidden">
           {/* Background Beam Effect */}
           <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[1px] bg-gradient-to-r from-transparent via-purple-500 to-transparent"></div>
 
           <div className="relative z-10">
-            <h2 className="text-4xl md:text-6xl font-serif mb-6">
+            <h2 className="text-2xl sm:text-3xl md:text-5xl lg:text-6xl font-serif mb-4 md:mb-6 px-2">
               Hai bisogno di <span className="italic text-purple-400">consulenza?</span>
             </h2>
-            <p className="text-xl text-white/50 mb-8 max-w-2xl mx-auto">
+            <p className="text-sm md:text-lg lg:text-xl text-white/50 mb-6 md:mb-8 max-w-2xl mx-auto px-4">
               Contattaci per una consulenza personalizzata. Il nostro team è pronto ad ascoltare le tue esigenze.
             </p>
-            <button className="group px-10 py-5 bg-white text-black rounded-3xl font-bold text-lg hover:scale-105 transition-all duration-300 flex items-center gap-3 mx-auto">
+            <button className="group px-6 md:px-8 lg:px-10 py-3 md:py-4 lg:py-5 bg-white text-black rounded-2xl md:rounded-3xl font-bold text-sm md:text-base lg:text-lg hover:scale-105 transition-all duration-300 flex items-center gap-2 md:gap-3 mx-auto">
               Prenota Consulenza Gratuita
-              <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+              <ArrowRight className="w-4 md:w-5 h-4 md:h-5 group-hover:translate-x-1 transition-transform" />
             </button>
           </div>
 

@@ -64,8 +64,8 @@ const Hero: React.FC = () => {
   const activeIndex = currentImageIndex;
 
   return (
-    <section className="relative min-h-screen flex flex-col items-center justify-center pt-32 pb-20 px-6 overflow-hidden">
-      <div className="max-w-7xl w-full grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+    <section className="relative min-h-screen flex flex-col items-center justify-center pt-24 md:pt-32 pb-16 md:pb-20 px-4 md:px-6 overflow-hidden">
+      <div className="max-w-7xl w-full grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 lg:gap-16 items-center">
 
         <ScrollAnimation direction="up" delay={0.1} duration={0.8}>
           <div className="flex flex-col gap-8 z-20">
@@ -77,9 +77,9 @@ const Hero: React.FC = () => {
             <span className="text-xs font-medium text-emerald-100/80">Disponibili per nuove consulenze</span>
           </div>
 
-          <h1 className="text-6xl md:text-8xl lg:text-[110px] leading-[1.1] font-serif tracking-tight">
+          <h1 className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl xl:text-[110px] leading-[1.1] font-serif tracking-tight">
             Semplifichiamo il tuo <br />
-            <span className="inline-block italic text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-indigo-200 to-purple-400 pr-8 pb-4">
+            <span className="inline-block italic text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-indigo-200 to-purple-400 pr-4 md:pr-8 pb-2 md:pb-4">
               futuro fiscale
             </span>
           </h1>
@@ -88,15 +88,15 @@ const Hero: React.FC = () => {
             Consulenza d'eccellenza a Catania. Studio Associato Giuliano Lello Coco: la tua bussola nel labirinto tributario per imprese e professionisti.
           </p>
 
-          <div className="flex flex-wrap gap-4 pt-4">
-            <button className="group relative px-8 py-4 bg-white text-black rounded-2xl font-bold flex items-center gap-2 overflow-hidden transition-all duration-500 hover:scale-105 hover:shadow-[0_0_30px_rgba(168,85,247,0.4)]">
+          <div className="flex flex-col sm:flex-row flex-wrap gap-3 md:gap-4 pt-4 w-full sm:w-auto">
+            <button className="group relative px-6 md:px-8 py-3 md:py-4 bg-white text-black rounded-2xl font-bold flex items-center justify-center gap-2 overflow-hidden transition-all duration-500 hover:scale-105 hover:shadow-[0_0_30px_rgba(168,85,247,0.4)] w-full sm:w-auto">
               <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">
                 <div className="border-beam-active"></div>
               </div>
-              <span className="relative z-10">Esplora i Servizi</span>
-              <ArrowUpRight className="relative z-10 w-5 h-5 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
+              <span className="relative z-10 text-sm md:text-base">Esplora i Servizi</span>
+              <ArrowUpRight className="relative z-10 w-4 md:w-5 h-4 md:h-5 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
             </button>
-            <button className="px-8 py-4 rounded-2xl border border-white/10 glass text-white font-bold transition-all hover:bg-white/5 hover:border-white/20">
+            <button className="px-6 md:px-8 py-3 md:py-4 rounded-2xl border border-white/10 glass text-white font-bold transition-all hover:bg-white/5 hover:border-white/20 text-sm md:text-base w-full sm:w-auto">
               Il Nostro Metodo
             </button>
           </div>
@@ -105,9 +105,9 @@ const Hero: React.FC = () => {
 
         <ScrollAnimation direction="up" delay={0.3} duration={0.8}>
         {/* Premium Image Container */}
-        <div className="relative flex justify-center items-center z-10 perspective-1000">
+        <div className="relative flex justify-center items-center z-10 perspective-1000 mt-8 lg:mt-0">
           {/* Enhanced Glow Background */}
-          <div className="absolute inset-0 bg-gradient-to-br from-purple-600/40 via-indigo-600/20 to-pink-600/30 rounded-full blur-[140px] animate-pulse"></div>
+          <div className="absolute inset-0 bg-gradient-to-br from-purple-600/40 via-indigo-600/20 to-pink-600/30 rounded-full blur-[80px] md:blur-[140px] animate-pulse"></div>
           <div
             className="absolute inset-0 bg-gradient-to-tr from-cyan-500/20 to-purple-600/20 rounded-full blur-[100px]"
             style={{
@@ -118,9 +118,9 @@ const Hero: React.FC = () => {
 
           {/* Main Image Container with 3D Effect */}
           <div
-            className="relative w-full max-w-[550px] aspect-[3/4] group"
+            className="relative w-full max-w-[400px] md:max-w-[500px] lg:max-w-[550px] aspect-[3/4] group"
             style={{
-              transform: `perspective(1200px) rotateY(${mousePos.x * 5}deg) rotateX(${mousePos.y * -5}deg)`,
+              transform: window.innerWidth >= 768 ? `perspective(1200px) rotateY(${mousePos.x * 5}deg) rotateX(${mousePos.y * -5}deg)` : 'none',
               transition: 'transform 0.2s ease-out'
             }}
           >
@@ -245,7 +245,7 @@ const Hero: React.FC = () => {
       </div>
 
       <ScrollAnimation direction="fade" delay={0.6}>
-        <div className="absolute bottom-8 flex flex-col items-center gap-4 opacity-30">
+        <div className="hidden md:flex absolute bottom-8 flex-col items-center gap-4 opacity-30">
           <div className="w-[1px] h-12 bg-gradient-to-b from-white to-transparent"></div>
           <span className="text-[9px] uppercase tracking-[0.4em]">Esplora lo Studio</span>
         </div>
