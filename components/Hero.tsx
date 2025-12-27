@@ -23,14 +23,35 @@ const images = [
 const Hero: React.FC = () => {
   const [scrollY, setScrollY] = useState(0);
   const [isMounted, setIsMounted] = useState(false);
+  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   useEffect(() => {
     setIsMounted(true);
     const handleScroll = () => {
       setScrollY(window.scrollY);
     };
+
+    const handleMouseMove = (e: MouseEvent) => {
+      setMousePos({
+        x: (e.clientX / window.innerWidth - 0.5) * 2,
+        y: (e.clientY / window.innerHeight - 0.5) * 2
+      });
+    };
+
     window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener('mousemove', handleMouseMove, { passive: true });
+
+    // Auto-play carousel with Ken Burns effect
+    const interval = setInterval(() => {
+      setCurrentImageIndex((prev) => (prev + 1) % images.length);
+    }, 5000);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('mousemove', handleMouseMove);
+      clearInterval(interval);
+    };
   }, []);
 
   const getActiveIndex = () => {
@@ -39,7 +60,7 @@ const Hero: React.FC = () => {
     return 2;
   };
 
-  const activeIndex = getActiveIndex();
+  const activeIndex = currentImageIndex;
 
   return (
     <section className="relative min-h-screen flex flex-col items-center justify-center pt-32 pb-20 px-6 overflow-hidden">
@@ -83,110 +104,141 @@ const Hero: React.FC = () => {
           </div>
         </div>
 
-        <div className="relative flex justify-center items-center z-10">
-          {/* Sfondo luminoso accentuato */}
-          <div className="absolute inset-0 bg-gradient-to-br from-purple-600/30 via-indigo-600/10 to-transparent rounded-full blur-[120px] animate-pulse"></div>
-          
-          {/* Forme Astratte con Immagini */}
-          <div 
-            className="absolute -top-12 -left-12 w-32 h-32 rounded-full overflow-hidden border border-white/20 z-30 animate-float shadow-2xl transition-transform duration-700 pointer-events-none"
-            style={{ 
-              transform: `translate(${scrollY * -0.05}px, ${scrollY * 0.05}px) rotate(${scrollY * 0.1}deg)`,
+        {/* Premium Image Container */}
+        <div className="relative flex justify-center items-center z-10 perspective-1000">
+          {/* Enhanced Glow Background */}
+          <div className="absolute inset-0 bg-gradient-to-br from-purple-600/40 via-indigo-600/20 to-pink-600/30 rounded-full blur-[140px] animate-pulse"></div>
+          <div
+            className="absolute inset-0 bg-gradient-to-tr from-cyan-500/20 to-purple-600/20 rounded-full blur-[100px]"
+            style={{
+              animation: 'float 8s ease-in-out infinite',
               animationDelay: '1s'
             }}
-          >
-            <img 
-              src="https://images.unsplash.com/photo-1554224155-1696413565d3?q=80&w=400&auto=format&fit=crop" 
-              className="w-full h-full object-cover grayscale opacity-60"
-              alt="Dettaglio ufficio"
-            />
-          </div>
+          ></div>
 
-          <div 
-            className="absolute -bottom-16 -right-16 w-40 h-40 rounded-[40px] overflow-hidden border border-white/10 z-30 animate-float shadow-2xl transition-transform duration-700 pointer-events-none"
-            style={{ 
-              transform: `translate(${scrollY * 0.03}px, ${scrollY * -0.03}px) rotate(${scrollY * -0.05}deg)`,
-              animationDelay: '2.5s'
+          {/* Main Image Container with 3D Effect */}
+          <div
+            className="relative w-full max-w-[550px] aspect-[3/4] group"
+            style={{
+              transform: `perspective(1200px) rotateY(${mousePos.x * 5}deg) rotateX(${mousePos.y * -5}deg)`,
+              transition: 'transform 0.2s ease-out'
             }}
           >
-            <img 
-              src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?q=80&w=400&auto=format&fit=crop" 
-              className="w-full h-full object-cover grayscale opacity-40"
-              alt="Firma legale"
-            />
-          </div>
-
-          <div 
-            className="absolute top-1/4 -right-20 w-24 h-24 rounded-full overflow-hidden border border-white/5 z-0 animate-float opacity-30 pointer-events-none"
-            style={{ 
-              transform: `translate(${scrollY * 0.08}px, ${scrollY * 0.02}px)`,
-              animationDelay: '0.5s',
-              animationDuration: '8s'
-            }}
-          >
-            <img 
-              src="https://images.unsplash.com/photo-1517048676732-d65bc937f952?q=80&w=400&auto=format&fit=crop" 
-              className="w-full h-full object-cover grayscale"
-              alt="Meeting"
-            />
-          </div>
-
-          {/* Contenitore Immagini Principale */}
-          <div className="relative w-full max-w-[500px] aspect-[4/5] md:aspect-square min-h-[450px] animate-float">
-            
-            {/* Cornici decorative rotanti */}
-            <div 
-              className="absolute -inset-4 border border-white/10 rounded-[60px] rotate-6 pointer-events-none transition-transform duration-1000" 
-              style={{ transform: `rotate(${6 + scrollY * 0.02}deg)` }}
+            {/* Animated Gradient Border */}
+            <div className="absolute -inset-1 bg-gradient-to-r from-purple-500 via-pink-500 to-cyan-500 rounded-[56px] opacity-75 blur-sm group-hover:opacity-100 transition-opacity duration-500"
+              style={{
+                animation: 'gradient-rotate 8s linear infinite'
+              }}
             ></div>
-            <div 
-              className="absolute -inset-8 border border-white/5 rounded-[80px] -rotate-3 pointer-events-none transition-transform duration-1000" 
-              style={{ transform: `rotate(${-3 - scrollY * 0.02}deg)` }}
+
+            {/* Premium Glass Frame */}
+            <div className="absolute -inset-3 glass rounded-[60px] border border-white/10 backdrop-blur-xl"
+              style={{
+                boxShadow: '0 0 80px rgba(168, 85, 247, 0.3), inset 0 0 40px rgba(255, 255, 255, 0.05)'
+              }}
             ></div>
-            
-            {/* Box Immagini Reale */}
-            <div className="relative h-full w-full rounded-[48px] overflow-hidden border border-white/20 shadow-[0_0_50px_rgba(0,0,0,0.5)] bg-zinc-900 transition-all duration-700">
-              
+
+            {/* Main Image Box with Effects */}
+            <div className="relative h-full w-full rounded-[52px] overflow-hidden border-2 border-white/30 shadow-2xl bg-zinc-900"
+              style={{
+                boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.8), 0 0 100px rgba(168, 85, 247, 0.4)'
+              }}
+            >
               {images.map((img, idx) => (
-                <div 
+                <div
                   key={idx}
-                  className={`absolute inset-0 transition-all duration-1000 ease-in-out z-0 ${
-                    activeIndex === idx ? 'opacity-100 scale-100 pointer-events-auto' : 'opacity-0 scale-110 pointer-events-none'
+                  className={`absolute inset-0 transition-all duration-1000 ease-in-out ${
+                    activeIndex === idx ? 'opacity-100 scale-100' : 'opacity-0 scale-110'
                   }`}
                 >
-                  <img 
-                    src={img.url} 
-                    alt={img.label} 
-                    className="w-full h-full object-cover grayscale-[0.2] hover:grayscale-0 transition-all duration-1000"
-                    loading="lazy"
-                  />
-                  
-                  {/* Overlay gradiente per leggibilità label */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-80"></div>
-                  
-                  {/* Label dinamica */}
-                  <div className={`absolute bottom-8 left-8 right-8 glass p-5 rounded-3xl border-white/10 transition-all duration-700 ${
+                  {/* Ken Burns Effect - Slow Zoom & Pan */}
+                  <div className={`w-full h-full ${activeIndex === idx ? 'animate-ken-burns' : ''}`}>
+                    <img
+                      src={img.url}
+                      alt={img.label}
+                      className="w-full h-full object-cover"
+                      style={{
+                        filter: 'contrast(1.1) saturate(1.2)',
+                      }}
+                      loading="lazy"
+                    />
+                  </div>
+
+                  {/* Film Grain Texture Overlay */}
+                  <div className="absolute inset-0 opacity-[0.03] mix-blend-overlay pointer-events-none"
+                    style={{
+                      backgroundImage: 'url("data:image/svg+xml,%3Csvg viewBox=\'0 0 400 400\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cfilter id=\'noiseFilter\'%3E%3CfeTurbulence type=\'fractalNoise\' baseFrequency=\'0.9\' numOctaves=\'4\' stitchTiles=\'stitch\'/%3E%3C/filter%3E%3Crect width=\'100%25\' height=\'100%25\' filter=\'url(%23noiseFilter)\'/%3E%3C/svg%3E")',
+                      backgroundSize: '200px 200px'
+                    }}
+                  ></div>
+
+                  {/* Chromatic Aberration Effect */}
+                  <div className="absolute inset-0 mix-blend-screen opacity-20 pointer-events-none">
+                    <div className="absolute inset-0 bg-red-500/10 translate-x-[2px]"></div>
+                    <div className="absolute inset-0 bg-cyan-500/10 -translate-x-[2px]"></div>
+                  </div>
+
+                  {/* Vignette Effect */}
+                  <div className="absolute inset-0 pointer-events-none"
+                    style={{
+                      background: 'radial-gradient(circle at center, transparent 30%, rgba(0,0,0,0.3) 100%)'
+                    }}
+                  ></div>
+
+                  {/* Enhanced Gradient Overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/30 to-transparent"></div>
+
+                  {/* Light Leak Effect */}
+                  <div className="absolute top-0 right-0 w-1/3 h-1/3 bg-gradient-to-br from-purple-400/20 to-transparent blur-3xl opacity-60"></div>
+                  <div className="absolute bottom-0 left-0 w-1/2 h-1/2 bg-gradient-to-tr from-indigo-400/15 to-transparent blur-3xl opacity-50"></div>
+
+                  {/* Premium Label Card */}
+                  <div className={`absolute bottom-6 left-6 right-6 glass p-6 rounded-[28px] border border-white/20 backdrop-blur-xl transition-all duration-700 ${
                     activeIndex === idx ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
-                  }`}>
-                    <p className="text-[10px] uppercase tracking-[0.2em] text-purple-400 font-bold mb-1">{img.label}</p>
-                    <p className="text-white font-serif italic text-xl">{img.location}</p>
+                  }`}
+                    style={{
+                      boxShadow: '0 8px 32px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.1)'
+                    }}
+                  >
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <p className="text-[10px] uppercase tracking-[0.25em] text-purple-400 font-bold mb-1.5 flex items-center gap-2">
+                          <span className="w-1.5 h-1.5 rounded-full bg-purple-400 animate-pulse"></span>
+                          {img.label}
+                        </p>
+                        <p className="text-white font-serif text-2xl">{img.location}</p>
+                      </div>
+                      <div className="w-10 h-10 rounded-full glass border border-white/20 flex items-center justify-center">
+                        <span className="text-purple-300 text-lg">→</span>
+                      </div>
+                    </div>
                   </div>
                 </div>
               ))}
-              
-              {/* Indicatori di navigazione laterali */}
-              <div className="absolute top-1/2 -translate-y-1/2 right-6 flex flex-col gap-3 z-30">
+
+              {/* Enhanced Navigation Dots */}
+              <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-2 z-40 glass px-4 py-2 rounded-full border border-white/10">
                 {images.map((_, idx) => (
-                  <div 
+                  <button
                     key={idx}
-                    className={`w-1 rounded-full transition-all duration-700 ${
-                      activeIndex === idx ? 'bg-white h-8' : 'bg-white/20 h-2'
+                    onClick={() => setCurrentImageIndex(idx)}
+                    className={`transition-all duration-500 rounded-full ${
+                      activeIndex === idx
+                        ? 'bg-white w-8 h-2'
+                        : 'bg-white/30 w-2 h-2 hover:bg-white/50'
                     }`}
+                    aria-label={`Go to image ${idx + 1}`}
                   />
                 ))}
               </div>
 
+              {/* Corner Accents */}
+              <div className="absolute top-4 left-4 w-12 h-12 border-l-2 border-t-2 border-purple-400/30 rounded-tl-2xl pointer-events-none"></div>
+              <div className="absolute bottom-4 right-4 w-12 h-12 border-r-2 border-b-2 border-purple-400/30 rounded-br-2xl pointer-events-none"></div>
             </div>
+
+            {/* Floating Reflection Effect */}
+            <div className="absolute -bottom-4 left-1/2 -translate-x-1/2 w-4/5 h-8 bg-gradient-to-b from-purple-500/20 to-transparent blur-2xl"></div>
           </div>
         </div>
       </div>
@@ -195,6 +247,37 @@ const Hero: React.FC = () => {
         <div className="w-[1px] h-12 bg-gradient-to-b from-white to-transparent"></div>
         <span className="text-[9px] uppercase tracking-[0.4em]">Esplora lo Studio</span>
       </div>
+
+      <style>{`
+        @keyframes ken-burns {
+          0% {
+            transform: scale(1) translateX(0) translateY(0);
+          }
+          100% {
+            transform: scale(1.1) translateX(-3%) translateY(-2%);
+          }
+        }
+
+        @keyframes gradient-rotate {
+          0% {
+            background-position: 0% 50%;
+          }
+          50% {
+            background-position: 100% 50%;
+          }
+          100% {
+            background-position: 0% 50%;
+          }
+        }
+
+        .perspective-1000 {
+          perspective: 1000px;
+        }
+
+        .animate-ken-burns {
+          animation: ken-burns 20s ease-in-out infinite alternate;
+        }
+      `}</style>
     </section>
   );
 };
