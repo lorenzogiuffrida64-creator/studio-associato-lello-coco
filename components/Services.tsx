@@ -278,31 +278,6 @@ const Services: React.FC = () => {
             </ScrollAnimation>
           ))}
         </div>
-
-        <ScrollAnimation direction="up" delay={0.2}>
-        {/* CTA Section */}
-        <div className="glass rounded-[32px] md:rounded-[40px] lg:rounded-[50px] p-8 md:p-12 lg:p-20 text-center relative overflow-hidden">
-          {/* Background Beam Effect */}
-          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[1px] bg-gradient-to-r from-transparent via-purple-500 to-transparent"></div>
-
-          <div className="relative z-10">
-            <h2 className="text-2xl sm:text-3xl md:text-5xl lg:text-6xl font-serif mb-4 md:mb-6 px-2">
-              Hai bisogno di <span className="italic text-purple-400">consulenza?</span>
-            </h2>
-            <p className="text-sm md:text-lg lg:text-xl text-white/50 mb-6 md:mb-8 max-w-2xl mx-auto px-4">
-              Contattaci per una consulenza personalizzata. Il nostro team è pronto ad ascoltare le tue esigenze.
-            </p>
-            <button className="group px-6 md:px-8 lg:px-10 py-3 md:py-4 lg:py-5 bg-white text-black rounded-2xl md:rounded-3xl font-bold text-sm md:text-base lg:text-lg hover:scale-105 transition-all duration-300 flex items-center gap-2 md:gap-3 mx-auto">
-              Prenota Consulenza Gratuita
-              <ArrowRight className="w-4 md:w-5 h-4 md:h-5 group-hover:translate-x-1 transition-transform" />
-            </button>
-          </div>
-
-          {/* Decorative Background */}
-          <div className="absolute -bottom-20 -left-20 w-80 h-80 bg-purple-600/10 rounded-full blur-[120px]"></div>
-          <div className="absolute -top-20 -right-20 w-80 h-80 bg-indigo-600/10 rounded-full blur-[120px]"></div>
-        </div>
-        </ScrollAnimation>
       </div>
 
       <style>{`
