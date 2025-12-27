@@ -48,7 +48,11 @@ const Header: React.FC<HeaderProps> = ({ currentView, onNavigate }) => {
             setIsOpen(false);
           }}
         >
-          <div className="w-7 h-7 md:w-8 md:h-8 rounded-lg bg-gradient-to-br from-purple-400 to-indigo-600 transition-transform duration-500 group-hover:rotate-12 flex-shrink-0"></div>
+          <img
+            src="https://i.im.ge/2025/12/28/ByjLSF.ChatGPT-Image-27-dic-2025-20-18-27.png"
+            alt="Studio Giuliano Logo"
+            className="w-8 h-8 md:w-10 md:h-10 object-contain transition-transform duration-500 group-hover:scale-110 flex-shrink-0"
+          />
           <span className="font-medium tracking-tight text-xs md:text-sm uppercase opacity-90 whitespace-nowrap">Studio Giuliano</span>
         </div>
         
@@ -107,7 +111,11 @@ const Header: React.FC<HeaderProps> = ({ currentView, onNavigate }) => {
               setIsOpen(false);
             }}
           >
-            <div className="w-7 h-7 rounded-lg bg-gradient-to-br from-purple-400 to-indigo-600 transition-transform duration-500 group-hover:rotate-12 flex-shrink-0"></div>
+            <img
+              src="https://i.im.ge/2025/12/28/ByjLSF.ChatGPT-Image-27-dic-2025-20-18-27.png"
+              alt="Studio Giuliano Logo"
+              className="w-8 h-8 object-contain transition-transform duration-500 group-hover:scale-110 flex-shrink-0"
+            />
             <span className="font-medium tracking-tight text-xs uppercase opacity-90 whitespace-nowrap">Studio Giuliano</span>
           </div>
           <button
