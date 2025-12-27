@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { Send, CheckCircle2, Loader2, MapPin, Mail, Phone } from 'lucide-react';
 
 // Google Apps Script Web App URL for form submissions
-const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxqGUhI7yjuZYmXrU_0MtwNO7X5uUqxdQu-NcwCGuVYupIGFzvwqBBvoCabbXtJ7o8/exec';
+const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyeXaQPfN0xEhDeJsMRAfVQhHNrXZ_eNxwrsD3wTSehdQqJ2qxANC6LmJ9ol9j3aNs/exec';
 
 const Contact: React.FC = () => {
   const [formData, setFormData] = useState({
