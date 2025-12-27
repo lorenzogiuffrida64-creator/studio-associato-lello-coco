@@ -109,7 +109,7 @@ studio-associato-giuliano-lello-coco/
 
 Located in `/components/Contact.tsx` (lines 63, 73, 83):
 - **Address:** Viale Vittorio Veneto 12, Catania (CT)
-- **Email:** info@studiogiuliano.it
+- **Email:** studiocomgls@tiscali.it
 - **Phone:** +39 095 123 4567
 
 Please update these with your actual studio contact information before going live.
@@ -182,7 +182,7 @@ MIT License - see [LICENSE](LICENSE) file for details.
 ## Contact
 
 For inquiries about the Studio Associato Giuliano Lello Coco services or this website:
-- Email: info@studiogiuliano.it (placeholder - update with real contact)
+- Email: studiocomgls@tiscali.it
 - Location: Catania, Sicily, Italy
 
 ---
