@@ -36,19 +36,19 @@ const Header: React.FC<HeaderProps> = ({ currentView, onNavigate }) => {
   };
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 flex justify-center p-4 md:p-6">
-      <nav className={`glass rounded-[32px] md:rounded-full w-full max-w-7xl px-6 md:px-8 py-3 flex items-center justify-between md:justify-start gap-12 border border-white/5 transition-all duration-500`}>
-        
+    <header className="fixed top-0 left-0 right-0 z-50 flex justify-center p-3 md:p-4 lg:p-6">
+      <nav className={`glass rounded-[20px] md:rounded-[28px] lg:rounded-full w-full max-w-7xl px-4 sm:px-5 md:px-6 lg:px-8 py-2.5 md:py-3 flex items-center justify-between md:justify-start gap-4 md:gap-8 lg:gap-12 border border-white/5 transition-all duration-500 ${isOpen ? 'bg-transparent border-transparent' : ''}`}>
+
         {/* Logo */}
-        <div 
-          className="flex items-center gap-2 cursor-pointer group z-[60]" 
+        <div
+          className="flex items-center gap-1.5 md:gap-2 cursor-pointer group relative z-[70]"
           onClick={() => {
             onNavigate('home');
             setIsOpen(false);
           }}
         >
-          <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-purple-400 to-indigo-600 transition-transform duration-500 group-hover:rotate-12"></div>
-          <span className="font-medium tracking-tight text-sm uppercase opacity-90">Studio Giuliano</span>
+          <div className="w-7 h-7 md:w-8 md:h-8 rounded-lg bg-gradient-to-br from-purple-400 to-indigo-600 transition-transform duration-500 group-hover:rotate-12 flex-shrink-0"></div>
+          <span className="font-medium tracking-tight text-xs md:text-sm uppercase opacity-90 whitespace-nowrap">Studio Giuliano</span>
         </div>
         
         {/* Desktop Menu */}
@@ -81,37 +81,37 @@ const Header: React.FC<HeaderProps> = ({ currentView, onNavigate }) => {
         </button>
 
         {/* Mobile Toggle Button */}
-        <button 
+        <button
           onClick={() => setIsOpen(!isOpen)}
-          className="md:hidden z-[60] p-2 text-white/80 hover:text-white transition-colors"
+          className="md:hidden relative z-[70] p-1.5 md:p-2 text-white/80 hover:text-white transition-colors"
           aria-label="Toggle Menu"
         >
-          {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+          {isOpen ? <X className="w-5 h-5 md:w-6 md:h-6" /> : <Menu className="w-5 h-5 md:w-6 md:h-6" />}
         </button>
 
         {/* Mobile Menu Overlay */}
-        <div 
-          className={`fixed inset-0 bg-[#050505] z-50 md:hidden flex flex-col items-center justify-center transition-all duration-500 ease-in-out ${
-            isOpen ? 'opacity-100 visible translate-y-0' : 'opacity-0 invisible -translate-y-4'
+        <div
+          className={`fixed inset-0 bg-[#050505] z-[60] md:hidden flex flex-col items-center justify-center transition-all duration-500 ease-in-out ${
+            isOpen ? 'opacity-100 visible translate-y-0' : 'opacity-0 invisible -translate-y-4 pointer-events-none'
           }`}
         >
           {/* Background Gradient for Mobile */}
           <div className="absolute inset-0 bg-gradient-to-b from-purple-900/10 via-transparent to-black pointer-events-none"></div>
 
-          <ul className="flex flex-col items-center gap-8 text-center relative z-10">
+          <ul className="flex flex-col items-center gap-6 sm:gap-8 text-center relative z-10 px-6">
             {navItems.map((item, idx) => (
-              <li 
+              <li
                 key={item.name}
-                style={{ 
+                style={{
                   transitionDelay: isOpen ? `${idx * 75}ms` : '0ms',
                   transform: isOpen ? 'translateY(0)' : 'translateY(20px)',
                   opacity: isOpen ? 1 : 0
                 }}
                 className="transition-all duration-500"
               >
-                <button 
+                <button
                   onClick={() => handleMobileNav(item.view, item.anchor)}
-                  className={`text-3xl font-medium tracking-tight uppercase hover:text-purple-400 transition-colors ${
+                  className={`text-2xl sm:text-3xl md:text-4xl font-medium tracking-tight uppercase hover:text-purple-400 transition-colors active:scale-95 ${
                     currentView === item.view && !item.anchor ? 'text-purple-400' : 'text-white/90'
                   }`}
                 >
@@ -120,26 +120,26 @@ const Header: React.FC<HeaderProps> = ({ currentView, onNavigate }) => {
               </li>
             ))}
           </ul>
-          
-          <div 
-            style={{ 
+
+          <div
+            style={{
               transitionDelay: isOpen ? '400ms' : '0ms',
               transform: isOpen ? 'translateY(0)' : 'translateY(20px)',
               opacity: isOpen ? 1 : 0
             }}
-            className="mt-16 relative z-10 transition-all duration-700"
+            className="mt-12 sm:mt-16 relative z-10 transition-all duration-700 px-6 w-full max-w-sm"
           >
-            <button 
+            <button
               onClick={() => handleMobileNav('home', '#contatti')}
-              className="flex items-center gap-3 px-8 py-4 bg-white text-black rounded-2xl font-bold text-lg hover:scale-105 active:scale-95 transition-transform"
+              className="w-full flex items-center justify-center gap-2 sm:gap-3 px-6 sm:px-8 py-3.5 sm:py-4 bg-white text-black rounded-2xl font-bold text-base sm:text-lg hover:scale-105 active:scale-95 transition-transform"
             >
               Prenota Consulenza
-              <ArrowRight className="w-5 h-5" />
+              <ArrowRight className="w-4 sm:w-5 h-4 sm:h-5" />
             </button>
           </div>
 
           {/* Background Decorative Element for Mobile Menu */}
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80vw] h-[80vw] bg-purple-600/5 rounded-full blur-[120px] -z-10"></div>
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80vw] h-[80vw] max-w-md max-h-md bg-purple-600/5 rounded-full blur-[100px] pointer-events-none"></div>
         </div>
       </nav>
     </header>
