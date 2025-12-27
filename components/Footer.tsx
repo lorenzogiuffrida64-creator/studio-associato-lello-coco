@@ -60,7 +60,7 @@ const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
               </div>
               <div className="relative w-full h-[400px] rounded-[24px] overflow-hidden border border-white/10">
                 <iframe
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3171.234567890123!2d15.0833333!3d37.5166667!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1313fec1c1c1c1c1%3A0x1234567890abcdef!2sVia%20Asiago%2C%2038%2C%2095127%20Catania%20CT%2C%20Italy!5e0!3m2!1sen!2sit!4v1234567890123!5m2!1sen!2sit"
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4079.3252384710836!2d15.100447776683403!3d37.51811867205125!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1313fcb7f9717479%3A0x7cfae67b4bca1b27!2sVia%20Asiago%2C%2038%2C%2095127%20Catania%20CT!5e1!3m2!1sit!2sit!4v1766841155845!5m2!1sit!2sit"
                   width="100%"
                   height="100%"
                   style={{ border: 0 }}
