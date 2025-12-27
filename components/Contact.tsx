@@ -1,6 +1,7 @@
 
 import React, { useState } from 'react';
 import { Send, CheckCircle2, Loader2, MapPin, Mail, Phone } from 'lucide-react';
+import ScrollAnimation from './ScrollAnimation';
 
 // Google Apps Script Web App URL for form submissions
 const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyeXaQPfN0xEhDeJsMRAfVQhHNrXZ_eNxwrsD3wTSehdQqJ2qxANC6LmJ9ol9j3aNs/exec';
@@ -57,7 +58,8 @@ const Contact: React.FC = () => {
     <section className="py-32 px-6 relative">
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-start">
-          
+
+          <ScrollAnimation direction="left" delay={0.1}>
           {/* Info Side */}
           <div className="flex flex-col gap-12">
             <div className="flex flex-col gap-6">
@@ -101,7 +103,9 @@ const Contact: React.FC = () => {
               </div>
             </div>
           </div>
+          </ScrollAnimation>
 
+          <ScrollAnimation direction="right" delay={0.1}>
           {/* Form Side */}
           <div className="relative">
             <div className="absolute -inset-4 bg-gradient-to-br from-purple-600/10 to-transparent blur-3xl opacity-50 rounded-full"></div>
@@ -226,6 +230,7 @@ const Contact: React.FC = () => {
               )}
             </div>
           </div>
+          </ScrollAnimation>
         </div>
       </div>
     </section>

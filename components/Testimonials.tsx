@@ -1,6 +1,7 @@
 
 import React from 'react';
 import { Star } from 'lucide-react';
+import ScrollAnimation from './ScrollAnimation';
 
 const reviews = [
   {
@@ -48,19 +49,21 @@ const Testimonials: React.FC = () => {
       <div className="absolute top-0 right-0 w-96 h-96 bg-purple-500/5 blur-[120px] rounded-full -translate-y-1/2 translate-x-1/3"></div>
       
       <div className="max-w-7xl mx-auto relative z-10">
-        <div className="text-center mb-20">
-          <h2 className="text-4xl md:text-6xl font-serif text-white mb-6">
-            La fiducia dei nostri <span className="px-4 py-1 bg-gradient-to-r from-purple-500 to-indigo-600 text-white rounded-xl italic">Clienti</span>
-          </h2>
-          <p className="text-white/40 max-w-xl mx-auto text-lg">
-            La nostra missione è guidare il progresso delle imprese locali attraverso una consulenza fiscale d'eccellenza e trasparente.
-          </p>
-        </div>
+        <ScrollAnimation direction="up" delay={0.1}>
+          <div className="text-center mb-20">
+            <h2 className="text-4xl md:text-6xl font-serif text-white mb-6">
+              La fiducia dei nostri <span className="px-4 py-1 bg-gradient-to-r from-purple-500 to-indigo-600 text-white rounded-xl italic">Clienti</span>
+            </h2>
+            <p className="text-white/40 max-w-xl mx-auto text-lg">
+              La nostra missione è guidare il progresso delle imprese locali attraverso una consulenza fiscale d'eccellenza e trasparente.
+            </p>
+          </div>
+        </ScrollAnimation>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {reviews.map((rev, idx) => (
-            <div 
-              key={idx}
+            <ScrollAnimation key={idx} direction="up" delay={idx * 0.1}>
+            <div
               className="group bg-zinc-900/40 p-10 rounded-[40px] border border-white/5 transition-all duration-500 hover:-rotate-2 hover:-translate-y-3 hover:shadow-[0_20px_50px_rgba(168,85,247,0.15)] hover:border-white/20 cursor-default flex flex-col justify-between"
             >
               <div>
@@ -86,6 +89,7 @@ const Testimonials: React.FC = () => {
                 </div>
               </div>
             </div>
+            </ScrollAnimation>
           ))}
         </div>
       </div>

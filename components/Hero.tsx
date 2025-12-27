@@ -1,6 +1,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { ArrowUpRight } from 'lucide-react';
+import ScrollAnimation from './ScrollAnimation';
 
 const images = [
   {
@@ -65,12 +66,9 @@ const Hero: React.FC = () => {
   return (
     <section className="relative min-h-screen flex flex-col items-center justify-center pt-32 pb-20 px-6 overflow-hidden">
       <div className="max-w-7xl w-full grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-        
-        <div 
-          className={`flex flex-col gap-8 z-20 transition-all duration-1000 ease-out ${
-            isMounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
-          }`}
-        >
+
+        <ScrollAnimation direction="up" delay={0.1} duration={0.8}>
+          <div className="flex flex-col gap-8 z-20">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass border border-white/10 w-fit">
             <span className="relative flex h-2 w-2">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
@@ -102,8 +100,10 @@ const Hero: React.FC = () => {
               Il Nostro Metodo
             </button>
           </div>
-        </div>
+          </div>
+        </ScrollAnimation>
 
+        <ScrollAnimation direction="up" delay={0.3} duration={0.8}>
         {/* Premium Image Container */}
         <div className="relative flex justify-center items-center z-10 perspective-1000">
           {/* Enhanced Glow Background */}
@@ -241,12 +241,15 @@ const Hero: React.FC = () => {
             <div className="absolute -bottom-4 left-1/2 -translate-x-1/2 w-4/5 h-8 bg-gradient-to-b from-purple-500/20 to-transparent blur-2xl"></div>
           </div>
         </div>
+        </ScrollAnimation>
       </div>
-      
-      <div className="absolute bottom-8 flex flex-col items-center gap-4 opacity-30">
-        <div className="w-[1px] h-12 bg-gradient-to-b from-white to-transparent"></div>
-        <span className="text-[9px] uppercase tracking-[0.4em]">Esplora lo Studio</span>
-      </div>
+
+      <ScrollAnimation direction="fade" delay={0.6}>
+        <div className="absolute bottom-8 flex flex-col items-center gap-4 opacity-30">
+          <div className="w-[1px] h-12 bg-gradient-to-b from-white to-transparent"></div>
+          <span className="text-[9px] uppercase tracking-[0.4em]">Esplora lo Studio</span>
+        </div>
+      </ScrollAnimation>
 
       <style>{`
         @keyframes ken-burns {

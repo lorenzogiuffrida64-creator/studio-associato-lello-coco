@@ -1,6 +1,7 @@
 
 import React from 'react';
 import { Calculator, ShieldCheck, FileText, TrendingUp, Users } from 'lucide-react';
+import ScrollAnimation from './ScrollAnimation';
 
 const benefits = [
   {
@@ -34,19 +35,21 @@ const Benefits: React.FC = () => {
   return (
     <section className="py-32 px-6 relative">
       <div className="max-w-7xl mx-auto">
-        <div className="text-center mb-24">
-          <h2 className="text-4xl md:text-6xl font-serif mb-6">
-            I Nostri <br /> <span className="italic text-white/60">Servizi Professionali</span>
-          </h2>
-          <p className="text-white/40 max-w-2xl mx-auto">
-            Studio di consulenza contabile, fiscale e tributaria con professionisti qualificati al servizio delle imprese e dei privati.
-          </p>
-        </div>
+        <ScrollAnimation direction="up" delay={0.1}>
+          <div className="text-center mb-24">
+            <h2 className="text-4xl md:text-6xl font-serif mb-6">
+              I Nostri <br /> <span className="italic text-white/60">Servizi Professionali</span>
+            </h2>
+            <p className="text-white/40 max-w-2xl mx-auto">
+              Studio di consulenza contabile, fiscale e tributaria con professionisti qualificati al servizio delle imprese e dei privati.
+            </p>
+          </div>
+        </ScrollAnimation>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {benefits.map((benefit, idx) => (
-            <div 
-              key={idx}
+            <ScrollAnimation key={idx} direction="up" delay={idx * 0.1}>
+            <div
               className={`glass p-10 rounded-[32px] group transition-all duration-500 hover:-translate-y-2 hover:bg-white/5 border-white/5 hover:border-white/20 ${idx === 3 ? 'lg:col-span-1.5' : ''}`}
             >
               <div className="w-12 h-12 rounded-2xl bg-white/5 flex items-center justify-center mb-8 group-hover:bg-purple-500/20 transition-colors duration-500">
@@ -57,8 +60,10 @@ const Benefits: React.FC = () => {
                 {benefit.description}
               </p>
             </div>
+            </ScrollAnimation>
           ))}
-          
+
+          <ScrollAnimation direction="up" delay={benefits.length * 0.1}>
           {/* Unique Call-to-action card */}
           <div className="glass p-10 rounded-[32px] flex flex-col items-center justify-center text-center bg-gradient-to-br from-purple-900/20 to-indigo-900/20 border-purple-500/20">
              <span className="text-sm font-medium mb-4 opacity-60">Ottieni più risultati con meno sforzi.</span>
@@ -66,6 +71,7 @@ const Benefits: React.FC = () => {
                Inizia Ora
              </button>
           </div>
+          </ScrollAnimation>
         </div>
       </div>
     </section>

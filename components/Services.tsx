@@ -1,6 +1,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { Calculator, ShieldCheck, FileText, TrendingUp, Scale, Building2, Receipt, Users2, CheckCircle, ArrowRight } from 'lucide-react';
+import ScrollAnimation from './ScrollAnimation';
 
 const services = [
   {
@@ -188,6 +189,7 @@ const Services: React.FC = () => {
       ></div>
 
       <div className="max-w-7xl mx-auto relative z-10">
+        <ScrollAnimation direction="up" delay={0.1}>
         {/* Header Section */}
         <div className="text-center mb-20">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass border border-white/10 w-fit mb-8 mx-auto">
@@ -209,12 +211,13 @@ const Services: React.FC = () => {
             <br />Un team di professionisti qualificati al servizio della tua impresa.
           </p>
         </div>
+        </ScrollAnimation>
 
         {/* Services Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-20">
           {services.map((service, idx) => (
+            <ScrollAnimation key={idx} direction="up" delay={idx * 0.1}>
             <div
-              key={idx}
               className="group relative glass rounded-[40px] p-8 md:p-10 border border-white/5 hover:border-white/20 transition-all duration-700 hover:scale-[1.02] cursor-pointer"
               onClick={() => setSelectedService(selectedService === idx ? null : idx)}
             >
@@ -272,9 +275,11 @@ const Services: React.FC = () => {
                 </button>
               </div>
             </div>
+            </ScrollAnimation>
           ))}
         </div>
 
+        <ScrollAnimation direction="up" delay={0.2}>
         {/* CTA Section */}
         <div className="glass rounded-[50px] p-12 md:p-20 text-center relative overflow-hidden">
           {/* Background Beam Effect */}
@@ -297,6 +302,7 @@ const Services: React.FC = () => {
           <div className="absolute -bottom-20 -left-20 w-80 h-80 bg-purple-600/10 rounded-full blur-[120px]"></div>
           <div className="absolute -top-20 -right-20 w-80 h-80 bg-indigo-600/10 rounded-full blur-[120px]"></div>
         </div>
+        </ScrollAnimation>
       </div>
 
       <style>{`

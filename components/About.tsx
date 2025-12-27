@@ -1,6 +1,7 @@
 
 import React, { useEffect, useState } from 'react';
 import { Target, Award, Heart, BookOpen, X } from 'lucide-react';
+import ScrollAnimation from './ScrollAnimation';
 
 const partners = [
   {
@@ -70,9 +71,10 @@ const About: React.FC = () => {
   return (
     <section className="py-20 lg:py-32 px-6 relative overflow-hidden min-h-screen">
       <div className="max-w-7xl mx-auto">
-        
+
         {/* Story Section */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center mb-40">
+          <ScrollAnimation direction="left" delay={0.1}>
           <div className="relative order-2 lg:order-1">
             <div className="relative z-10 rounded-[40px] overflow-hidden border border-white/10 aspect-[4/5] lg:aspect-square">
               <img 
@@ -88,7 +90,9 @@ const About: React.FC = () => {
               <p className="text-xs uppercase tracking-widest text-white/50 font-bold">Anni di Esperienza</p>
             </div>
           </div>
+          </ScrollAnimation>
 
+          <ScrollAnimation direction="right" delay={0.1}>
           <div className="flex flex-col gap-8 order-1 lg:order-2">
             <div className="inline-flex items-center gap-2 text-purple-400 text-sm font-bold uppercase tracking-[0.3em]">
               <span className="w-12 h-[1px] bg-purple-400/30"></span>
@@ -111,8 +115,10 @@ const About: React.FC = () => {
               ))}
             </div>
           </div>
+          </ScrollAnimation>
         </div>
 
+        <ScrollAnimation direction="up" delay={0.1}>
         {/* Partners Section */}
         <div className="text-center mb-20">
           <h3 className="text-4xl md:text-6xl font-serif mb-6">I Professionisti</h3>
@@ -120,11 +126,12 @@ const About: React.FC = () => {
             Un team multidisciplinare pronto ad affrontare ogni complessità del sistema tributario italiano.
           </p>
         </div>
+        </ScrollAnimation>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-20">
           {partners.map((partner, idx) => (
+            <ScrollAnimation key={idx} direction="up" delay={idx * 0.15}>
             <div
-              key={idx}
               className="group relative cursor-pointer"
               onClick={() => setSelectedPartner(idx)}
             >
@@ -150,6 +157,7 @@ const About: React.FC = () => {
                 </div>
               </div>
             </div>
+            </ScrollAnimation>
           ))}
         </div>
       </div>
