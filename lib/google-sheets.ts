@@ -71,9 +71,16 @@ export async function getSubmissions(): Promise<SheetSubmission[]> {
     const sheets = getSheetsClient();
     const spreadsheetId = '1Ik_4TgptJnI2NlTTOwivlYfAphxFTIVermWOEMlRKww';
 
+    // First, get the list of sheets to find the first one
+    const metadata = await sheets.spreadsheets.get({
+      spreadsheetId,
+    });
+
+    const firstSheet = metadata.data.sheets?.[0]?.properties?.title || 'Sheet1';
+
     const response = await sheets.spreadsheets.values.get({
       spreadsheetId,
-      range: 'Sheet1!A:E', // Adjust range based on your sheet structure
+      range: `${firstSheet}!A:E`,
     });
 
     const rows = response.data.values || [];
@@ -82,8 +89,11 @@ export async function getSubmissions(): Promise<SheetSubmission[]> {
       return [];
     }
 
-    // Assume first row is headers, skip it
-    const [headers, ...dataRows] = rows;
+    // Check if first row is headers
+    const hasHeaders = rows[0]?.[0]?.toLowerCase().includes('timestamp') ||
+                       rows[0]?.[0]?.toLowerCase().includes('data');
+
+    const dataRows = hasHeaders ? rows.slice(1) : rows;
 
     return dataRows.map((row) => ({
       id: generateSubmissionId(row[2] || '', row[0] || ''), // email + timestamp
@@ -110,11 +120,38 @@ export async function appendSubmission(data: {
     const sheets = getSheetsClient();
     const spreadsheetId = '1Ik_4TgptJnI2NlTTOwivlYfAphxFTIVermWOEMlRKww';
 
+    // First, get the list of sheets to find the first one
+    const metadata = await sheets.spreadsheets.get({
+      spreadsheetId,
+    });
+
+    const firstSheet = metadata.data.sheets?.[0]?.properties?.title || 'Sheet1';
+
+    // Check if sheet is empty and needs headers
+    const checkResponse = await sheets.spreadsheets.values.get({
+      spreadsheetId,
+      range: `${firstSheet}!A1:E1`,
+    });
+
+    const isEmpty = !checkResponse.data.values || checkResponse.data.values.length === 0;
+
+    // If empty, add headers first
+    if (isEmpty) {
+      await sheets.spreadsheets.values.update({
+        spreadsheetId,
+        range: `${firstSheet}!A1:E1`,
+        valueInputOption: 'USER_ENTERED',
+        requestBody: {
+          values: [['Timestamp', 'Name', 'Email', 'Subject', 'Message']],
+        },
+      });
+    }
+
     const timestamp = new Date().toISOString();
 
     await sheets.spreadsheets.values.append({
       spreadsheetId,
-      range: 'Sheet1!A:E',
+      range: `${firstSheet}!A:E`,
       valueInputOption: 'USER_ENTERED',
       requestBody: {
         values: [[
