@@ -1,12 +1,10 @@
 
+'use client';
+
 import React from 'react';
-import { View } from '../App';
+import Link from 'next/link';
 
-interface FooterProps {
-  onNavigate: (view: View, anchor?: string) => void;
-}
-
-const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
+const Footer: React.FC = () => {
   return (
     <footer className="pt-16 md:pt-24 lg:pt-32 pb-8 md:pb-12 px-4 md:px-6">
       <div className="max-w-7xl mx-auto">
@@ -21,15 +19,15 @@ const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
             <p className="text-sm md:text-lg lg:text-xl text-white/50 max-w-xl px-4">
               Prenota oggi un incontro conoscitivo gratuito presso il nostro studio in centro a Catania.
             </p>
-            <button
-              onClick={() => onNavigate('home', '#contatti')}
+            <Link
+              href="/#contatti"
               className="px-8 md:px-10 lg:px-12 py-3.5 md:py-4 lg:py-5 bg-white text-black rounded-2xl md:rounded-3xl font-bold text-base md:text-lg lg:text-xl hover:scale-105 transition-transform flex items-center gap-2 md:gap-3 group"
             >
               Contattaci Ora
               <div className="w-7 h-7 md:w-8 md:h-8 rounded-full bg-black/5 flex items-center justify-center group-hover:bg-black/10 transition-colors text-sm md:text-base">
                 →
               </div>
-            </button>
+            </Link>
           </div>
           
           {/* Subtle Decorative Background Shapes */}
@@ -75,13 +73,13 @@ const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
         </div>
 
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center pt-8 md:pt-12 border-t border-white/10 gap-6 md:gap-8">
-          <div className="flex flex-col gap-1.5 md:gap-2 cursor-pointer" onClick={() => onNavigate('home')}>
+          <Link href="/" className="flex flex-col gap-1.5 md:gap-2 cursor-pointer">
             <span className="font-serif text-2xl md:text-3xl italic">Giuliano Lello Coco</span>
             <span className="text-xs md:text-sm text-white/30">© 2025 Studio Associato. Tutti i diritti riservati.</span>
-          </div>
+          </Link>
 
           <div className="flex flex-wrap gap-x-8 md:gap-x-12 gap-y-3 md:gap-y-4 text-xs md:text-sm font-medium">
-            <button onClick={() => onNavigate('about')} className="opacity-50 hover:opacity-100 transition-opacity">Chi Siamo</button>
+            <Link href="/about" className="opacity-50 hover:opacity-100 transition-opacity">Chi Siamo</Link>
             <a href="#" className="opacity-50 hover:opacity-100 transition-opacity">Privacy Policy</a>
             <a href="#" className="opacity-50 hover:opacity-100 transition-opacity">Termini di Servizio</a>
             <a href="#" className="opacity-50 hover:opacity-100 transition-opacity">Linkedin</a>

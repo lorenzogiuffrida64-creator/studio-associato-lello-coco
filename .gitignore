@@ -14,6 +14,7 @@ node_modules
 dist
 dist-ssr
 out
+.next
 
 # Environment variables
 .env
@@ -37,3 +38,4 @@ out
 
 # OS files
 Thumbs.db
+data/*.db

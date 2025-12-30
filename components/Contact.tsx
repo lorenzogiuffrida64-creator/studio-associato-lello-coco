@@ -1,10 +1,9 @@
 
+'use client';
+
 import React, { useState } from 'react';
 import { Send, CheckCircle2, Loader2, MapPin, Mail, Phone } from 'lucide-react';
 import ScrollAnimation from './ScrollAnimation';
-
-// Google Apps Script Web App URL for form submissions
-const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyeXaQPfN0xEhDeJsMRAfVQhHNrXZ_eNxwrsD3wTSehdQqJ2qxANC6LmJ9ol9j3aNs/exec';
 
 const Contact: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -20,15 +19,18 @@ const Contact: React.FC = () => {
     setStatus('submitting');
 
     try {
-      // Send to Google Sheets
-      const response = await fetch(GOOGLE_SCRIPT_URL, {
+      // Send to Next.js API route (which then sends to Google Sheets)
+      const response = await fetch('/api/contact', {
         method: 'POST',
-        mode: 'no-cors',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(formData)
       });
+
+      if (!response.ok) {
+        throw new Error('Form submission failed');
+      }
 
       // Also save to localStorage as backup
       const existingSubmissions = JSON.parse(localStorage.getItem('studio_giuliano_contatti') || '[]');

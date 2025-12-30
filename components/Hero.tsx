@@ -132,7 +132,7 @@ const Hero: React.FC = () => {
           <div
             className="relative w-full max-w-[400px] md:max-w-[500px] lg:max-w-[550px] aspect-[3/4] group"
             style={{
-              transform: window.innerWidth >= 768 ? `perspective(1200px) rotateY(${mousePos.x * 5}deg) rotateX(${mousePos.y * -5}deg)` : 'none',
+              transform: isMounted && typeof window !== 'undefined' && window.innerWidth >= 768 ? `perspective(1200px) rotateY(${mousePos.x * 5}deg) rotateX(${mousePos.y * -5}deg)` : 'none',
               transition: 'transform 0.2s ease-out'
             }}
           >

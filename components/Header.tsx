@@ -1,15 +1,27 @@
 
+'use client';
+
 import React, { useState, useEffect } from 'react';
-import { View } from '../App';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { Menu, X, ArrowRight } from 'lucide-react';
 
+type View = 'home' | 'about' | 'services';
+
 interface HeaderProps {
-  currentView: View;
-  onNavigate: (view: View, anchor?: string) => void;
+  currentView?: View;
 }
 
-const Header: React.FC<HeaderProps> = ({ currentView, onNavigate }) => {
+const Header: React.FC<HeaderProps> = ({ currentView: propCurrentView }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const pathname = usePathname();
+
+  // Determine current view from pathname
+  const currentView = propCurrentView || (
+    pathname === '/about' ? 'about' :
+    pathname === '/services' ? 'services' :
+    'home'
+  );
 
   // Prevenzione dello scroll quando il menu è aperto
   useEffect(() => {
@@ -24,16 +36,11 @@ const Header: React.FC<HeaderProps> = ({ currentView, onNavigate }) => {
   }, [isOpen]);
 
   const navItems = [
-    { name: 'Chi Siamo', view: 'about' as View, anchor: undefined },
-    { name: 'Servizi', view: 'services' as View, anchor: undefined },
-    { name: 'Testimonial', view: 'home' as View, anchor: '#testimonials' },
-    { name: 'Contatti', view: 'home' as View, anchor: '#contatti' }
+    { name: 'Chi Siamo', href: '/about', view: 'about' as View },
+    { name: 'Servizi', href: '/services', view: 'services' as View },
+    { name: 'Testimonial', href: '/#testimonials', view: 'home' as View },
+    { name: 'Contatti', href: '/#contatti', view: 'home' as View }
   ];
-
-  const handleMobileNav = (view: View, anchor?: string) => {
-    onNavigate(view, anchor);
-    setIsOpen(false);
-  };
 
   return (
     <>
@@ -41,12 +48,10 @@ const Header: React.FC<HeaderProps> = ({ currentView, onNavigate }) => {
       <nav className={`glass rounded-[20px] md:rounded-[28px] lg:rounded-full w-full max-w-7xl px-4 sm:px-5 md:px-6 lg:px-8 py-2.5 md:py-3 flex items-center justify-between md:justify-start gap-4 md:gap-8 lg:gap-12 border border-white/5 transition-all duration-500 ${isOpen ? 'opacity-0 md:opacity-100' : 'opacity-100'}`}>
 
         {/* Logo */}
-        <div
+        <Link
+          href="/"
           className="flex items-center gap-1.5 md:gap-2 cursor-pointer group relative z-[70]"
-          onClick={() => {
-            onNavigate('home');
-            setIsOpen(false);
-          }}
+          onClick={() => setIsOpen(false)}
         >
           <img
             src="https://i.im.ge/2025/12/28/ByjLSF.ChatGPT-Image-27-dic-2025-20-18-27.png"
@@ -54,36 +59,44 @@ const Header: React.FC<HeaderProps> = ({ currentView, onNavigate }) => {
             className="w-8 h-8 md:w-10 md:h-10 object-contain transition-transform duration-500 group-hover:scale-110 flex-shrink-0 rounded-lg"
           />
           <span className="font-medium tracking-tight text-xs md:text-sm uppercase opacity-90 whitespace-nowrap">Studio Giuliano</span>
-        </div>
+        </Link>
         
         {/* Desktop Menu */}
         <ul className="hidden md:flex items-center gap-8 text-sm font-medium">
           {navItems.map((item) => (
             <li key={item.name}>
-              <button 
-                onClick={() => onNavigate(item.view, item.anchor)}
+              <Link
+                href={item.href}
                 className={`transition-opacity duration-300 relative group ${
-                  (currentView === item.view && !item.anchor) 
-                    ? 'opacity-100' 
+                  currentView === item.view
+                    ? 'opacity-100'
                     : 'opacity-60 hover:opacity-100'
                 }`}
               >
                 {item.name}
                 <span className={`absolute -bottom-1 left-0 h-[1px] bg-white transition-all duration-300 ${
-                  currentView === item.view && !item.anchor ? 'w-full' : 'w-0 group-hover:w-full'
+                  currentView === item.view ? 'w-full' : 'w-0 group-hover:w-full'
                 }`}></span>
-              </button>
+              </Link>
             </li>
           ))}
         </ul>
 
         {/* Desktop CTA */}
-        <button 
-          onClick={() => onNavigate('home', '#contatti')}
-          className="hidden md:block ml-auto text-xs font-semibold uppercase tracking-widest px-6 py-2 rounded-full glass hover:bg-white/10 transition-all duration-300 border border-white/10"
-        >
-          Prenota Consulenza
-        </button>
+        <div className="hidden md:flex ml-auto items-center gap-3">
+          <Link
+            href="/admin"
+            className="text-xs font-semibold uppercase tracking-widest px-5 py-2 rounded-full glass hover:bg-purple-500/20 transition-all duration-300 border border-purple-400/30 text-purple-300 hover:border-purple-400/50"
+          >
+            Area Soci
+          </Link>
+          <Link
+            href="/#contatti"
+            className="text-xs font-semibold uppercase tracking-widest px-6 py-2 rounded-full glass hover:bg-white/10 transition-all duration-300 border border-white/10"
+          >
+            Prenota Consulenza
+          </Link>
+        </div>
 
         {/* Mobile Toggle Button */}
         <button
@@ -104,12 +117,10 @@ const Header: React.FC<HeaderProps> = ({ currentView, onNavigate }) => {
       >
         {/* Mobile Menu Header */}
         <div className="fixed top-0 left-0 right-0 z-[90] flex justify-between items-center p-4">
-          <div
+          <Link
+            href="/"
             className="flex items-center gap-1.5 cursor-pointer group"
-            onClick={() => {
-              onNavigate('home');
-              setIsOpen(false);
-            }}
+            onClick={() => setIsOpen(false)}
           >
             <img
               src="https://i.im.ge/2025/12/28/ByjLSF.ChatGPT-Image-27-dic-2025-20-18-27.png"
@@ -117,7 +128,7 @@ const Header: React.FC<HeaderProps> = ({ currentView, onNavigate }) => {
               className="w-8 h-8 object-contain transition-transform duration-500 group-hover:scale-110 flex-shrink-0 rounded-lg"
             />
             <span className="font-medium tracking-tight text-xs uppercase opacity-90 whitespace-nowrap">Studio Giuliano</span>
-          </div>
+          </Link>
           <button
             onClick={() => setIsOpen(false)}
             className="p-2 text-white/80 hover:text-white transition-colors"
@@ -144,14 +155,15 @@ const Header: React.FC<HeaderProps> = ({ currentView, onNavigate }) => {
                 }}
                 className="transition-all duration-500"
               >
-                <button
-                  onClick={() => handleMobileNav(item.view, item.anchor)}
+                <Link
+                  href={item.href}
+                  onClick={() => setIsOpen(false)}
                   className={`text-2xl sm:text-3xl md:text-4xl font-medium tracking-tight uppercase hover:text-purple-400 transition-colors active:scale-95 ${
-                    currentView === item.view && !item.anchor ? 'text-purple-400' : 'text-white/90'
+                    currentView === item.view ? 'text-purple-400' : 'text-white/90'
                   }`}
                 >
                   {item.name}
-                </button>
+                </Link>
               </li>
             ))}
           </ul>
@@ -162,15 +174,24 @@ const Header: React.FC<HeaderProps> = ({ currentView, onNavigate }) => {
               transform: isOpen ? 'translateY(0)' : 'translateY(20px)',
               opacity: isOpen ? 1 : 0
             }}
-            className="mt-12 sm:mt-16 relative z-10 transition-all duration-700 px-6 w-full max-w-sm"
+            className="mt-12 sm:mt-16 relative z-10 transition-all duration-700 px-6 w-full max-w-sm flex flex-col gap-3"
           >
-            <button
-              onClick={() => handleMobileNav('home', '#contatti')}
+            <Link
+              href="/admin"
+              onClick={() => setIsOpen(false)}
+              className="w-full flex items-center justify-center gap-2 sm:gap-3 px-6 sm:px-8 py-3.5 sm:py-4 glass border border-purple-400/30 text-purple-300 rounded-2xl font-bold text-base sm:text-lg hover:scale-105 active:scale-95 transition-transform hover:bg-purple-500/20"
+            >
+              Area Soci
+              <ArrowRight className="w-4 sm:w-5 h-4 sm:h-5" />
+            </Link>
+            <Link
+              href="/#contatti"
+              onClick={() => setIsOpen(false)}
               className="w-full flex items-center justify-center gap-2 sm:gap-3 px-6 sm:px-8 py-3.5 sm:py-4 bg-white text-black rounded-2xl font-bold text-base sm:text-lg hover:scale-105 active:scale-95 transition-transform"
             >
               Prenota Consulenza
               <ArrowRight className="w-4 sm:w-5 h-4 sm:h-5" />
-            </button>
+            </Link>
           </div>
 
         </div>
