@@ -1,6 +1,5 @@
 
 import React, { useState, useEffect } from 'react';
-import Image from 'next/image';
 import { ArrowUpRight } from 'lucide-react';
 import ScrollAnimation from './ScrollAnimation';
 
@@ -176,17 +175,14 @@ const Hero: React.FC = () => {
                 >
                   {/* Ken Burns Effect - Slow Zoom & Pan */}
                   <div className={`w-full h-full ${activeIndex === idx ? 'animate-ken-burns' : ''}`}>
-                    <Image
+                    <img
                       src={img.url}
                       alt={img.label}
-                      fill
-                      sizes="(max-width: 768px) 400px, (max-width: 1024px) 500px, 550px"
-                      className="object-cover"
+                      className="w-full h-full object-cover"
                       style={{
                         filter: 'contrast(1.1) saturate(1.2)',
                       }}
                       loading="lazy"
-                      quality={85}
                     />
                   </div>
 

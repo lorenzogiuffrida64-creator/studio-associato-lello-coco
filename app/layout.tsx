@@ -36,6 +36,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="it" className={`${inter.variable} ${instrumentSerif.variable}`}>
+      <head>
+        <Script src="https://cdn.tailwindcss.com" strategy="beforeInteractive" />
+      </head>
       <body className={inter.className}>
         {children}
         {/* @ts-ignore */}
