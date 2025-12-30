@@ -9,7 +9,7 @@ interface ScrollAnimationProps {
   duration?: number;
 }
 
-const ScrollAnimation: React.FC<ScrollAnimationProps> = ({
+const ScrollAnimation: React.FC<ScrollAnimationProps> = React.memo(({
   children,
   className = '',
   delay = 0,
@@ -45,6 +45,8 @@ const ScrollAnimation: React.FC<ScrollAnimationProps> = ({
       {children}
     </motion.div>
   );
-};
+});
+
+ScrollAnimation.displayName = 'ScrollAnimation';
 
 export default ScrollAnimation;

@@ -1,5 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
+import Image from 'next/image';
 import { ArrowUpRight } from 'lucide-react';
 import ScrollAnimation from './ScrollAnimation';
 
@@ -29,15 +30,31 @@ const Hero: React.FC = () => {
 
   useEffect(() => {
     setIsMounted(true);
+    let ticking = false;
+    let mouseX = 0;
+    let mouseY = 0;
+
     const handleScroll = () => {
-      setScrollY(window.scrollY);
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          setScrollY(window.scrollY);
+          ticking = false;
+        });
+        ticking = true;
+      }
     };
 
     const handleMouseMove = (e: MouseEvent) => {
-      setMousePos({
-        x: (e.clientX / window.innerWidth - 0.5) * 2,
-        y: (e.clientY / window.innerHeight - 0.5) * 2
-      });
+      mouseX = (e.clientX / window.innerWidth - 0.5) * 2;
+      mouseY = (e.clientY / window.innerHeight - 0.5) * 2;
+
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          setMousePos({ x: mouseX, y: mouseY });
+          ticking = false;
+        });
+        ticking = true;
+      }
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
@@ -119,21 +136,15 @@ const Hero: React.FC = () => {
         {/* Premium Image Container */}
         <div className="relative flex justify-center items-center z-10 perspective-1000 mt-8 lg:mt-0">
           {/* Enhanced Glow Background */}
-          <div className="absolute inset-0 bg-gradient-to-br from-purple-600/40 via-indigo-600/20 to-pink-600/30 rounded-full blur-[80px] md:blur-[140px] animate-pulse"></div>
-          <div
-            className="absolute inset-0 bg-gradient-to-tr from-cyan-500/20 to-purple-600/20 rounded-full blur-[100px]"
-            style={{
-              animation: 'float 8s ease-in-out infinite',
-              animationDelay: '1s'
-            }}
-          ></div>
+          <div className="absolute inset-0 bg-gradient-to-br from-purple-600/30 via-indigo-600/15 to-pink-600/20 rounded-full blur-[60px] md:blur-[100px]" style={{ willChange: 'opacity' }}></div>
 
           {/* Main Image Container with 3D Effect */}
           <div
             className="relative w-full max-w-[400px] md:max-w-[500px] lg:max-w-[550px] aspect-[3/4] group"
             style={{
               transform: isMounted && typeof window !== 'undefined' && window.innerWidth >= 768 ? `perspective(1200px) rotateY(${mousePos.x * 5}deg) rotateX(${mousePos.y * -5}deg)` : 'none',
-              transition: 'transform 0.2s ease-out'
+              transition: 'transform 0.2s ease-out',
+              willChange: 'transform'
             }}
           >
             {/* Animated Gradient Border */}
@@ -165,14 +176,17 @@ const Hero: React.FC = () => {
                 >
                   {/* Ken Burns Effect - Slow Zoom & Pan */}
                   <div className={`w-full h-full ${activeIndex === idx ? 'animate-ken-burns' : ''}`}>
-                    <img
+                    <Image
                       src={img.url}
                       alt={img.label}
-                      className="w-full h-full object-cover"
+                      fill
+                      sizes="(max-width: 768px) 400px, (max-width: 1024px) 500px, 550px"
+                      className="object-cover"
                       style={{
                         filter: 'contrast(1.1) saturate(1.2)',
                       }}
                       loading="lazy"
+                      quality={85}
                     />
                   </div>
 

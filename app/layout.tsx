@@ -1,6 +1,23 @@
 import type { Metadata } from 'next';
 import Script from 'next/script';
+import { Inter, Instrument_Serif } from 'next/font/google';
 import './globals.css';
+
+// Optimized font loading with Next.js
+const inter = Inter({
+  subsets: ['latin'],
+  weight: ['300', '400', '500', '600'],
+  variable: '--font-inter',
+  display: 'swap',
+});
+
+const instrumentSerif = Instrument_Serif({
+  subsets: ['latin'],
+  weight: ['400'],
+  style: ['normal', 'italic'],
+  variable: '--font-instrument-serif',
+  display: 'swap',
+});
 
 export const metadata: Metadata = {
   title: 'Studio Associato Giuliano Lello Coco - Consulenza Fiscale Catania',
@@ -12,26 +29,14 @@ export const metadata: Metadata = {
   },
 };
 
-// Force dynamic rendering for all pages
-export const dynamic = 'force-dynamic';
-
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
   return (
-    <html lang="it">
-      <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600&display=swap"
-          rel="stylesheet"
-        />
-        <Script src="https://cdn.tailwindcss.com" strategy="beforeInteractive" />
-      </head>
-      <body>
+    <html lang="it" className={`${inter.variable} ${instrumentSerif.variable}`}>
+      <body className={inter.className}>
         {children}
         {/* @ts-ignore */}
         <elevenlabs-convai agent-id="agent_6501kdehcr3cehsbxmv5ak7hhdrd"></elevenlabs-convai>
