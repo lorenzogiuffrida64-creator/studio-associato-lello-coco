@@ -22,60 +22,21 @@ const images = [
 ];
 
 const Hero: React.FC = () => {
-  const [scrollY, setScrollY] = useState(0);
   const [isMounted, setIsMounted] = useState(false);
-  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   useEffect(() => {
     setIsMounted(true);
-    let ticking = false;
-    let mouseX = 0;
-    let mouseY = 0;
 
-    const handleScroll = () => {
-      if (!ticking) {
-        window.requestAnimationFrame(() => {
-          setScrollY(window.scrollY);
-          ticking = false;
-        });
-        ticking = true;
-      }
-    };
-
-    const handleMouseMove = (e: MouseEvent) => {
-      mouseX = (e.clientX / window.innerWidth - 0.5) * 2;
-      mouseY = (e.clientY / window.innerHeight - 0.5) * 2;
-
-      if (!ticking) {
-        window.requestAnimationFrame(() => {
-          setMousePos({ x: mouseX, y: mouseY });
-          ticking = false;
-        });
-        ticking = true;
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    window.addEventListener('mousemove', handleMouseMove, { passive: true });
-
-    // Auto-play carousel with Ken Burns effect
+    // Auto-play carousel (removed Ken Burns for performance)
     const interval = setInterval(() => {
       setCurrentImageIndex((prev) => (prev + 1) % images.length);
     }, 5000);
 
     return () => {
-      window.removeEventListener('scroll', handleScroll);
-      window.removeEventListener('mousemove', handleMouseMove);
       clearInterval(interval);
     };
   }, []);
-
-  const getActiveIndex = () => {
-    if (scrollY < 300) return 0;
-    if (scrollY < 600) return 1;
-    return 2;
-  };
 
   const activeIndex = currentImageIndex;
 
@@ -133,19 +94,13 @@ const Hero: React.FC = () => {
 
         <ScrollAnimation direction="up" delay={0.3} duration={0.8}>
         {/* Premium Image Container */}
-        <div className="relative flex justify-center items-center z-10 perspective-1000 mt-8 lg:mt-0">
-          {/* Enhanced Glow Background */}
-          <div className="absolute inset-0 bg-gradient-to-br from-purple-600/30 via-indigo-600/15 to-pink-600/20 rounded-full blur-[60px] md:blur-[100px]" style={{ willChange: 'opacity' }}></div>
+        <div className="relative flex justify-center items-center z-10 mt-8 lg:mt-0">
+          {/* Simplified Glow Background */}
+          <div className="absolute inset-0 bg-gradient-to-br from-purple-600/20 to-transparent rounded-full blur-[40px]"></div>
 
-          {/* Main Image Container with 3D Effect */}
-          <div
-            className="relative w-full max-w-[400px] md:max-w-[500px] lg:max-w-[550px] aspect-[3/4] group"
-            style={{
-              transform: isMounted && typeof window !== 'undefined' && window.innerWidth >= 768 ? `perspective(1200px) rotateY(${mousePos.x * 5}deg) rotateX(${mousePos.y * -5}deg)` : 'none',
-              transition: 'transform 0.2s ease-out',
-              willChange: 'transform'
-            }}
-          >
+          {/* Main Image Container */}
+          <div className="relative w-full max-w-[400px] md:max-w-[500px] lg:max-w-[550px] aspect-[3/4] group">
+
             {/* Animated Gradient Border */}
             <div className="absolute -inset-1 bg-gradient-to-r from-purple-500 via-pink-500 to-cyan-500 rounded-[56px] opacity-75 blur-sm group-hover:opacity-100 transition-opacity duration-500"
               style={{
@@ -173,15 +128,12 @@ const Hero: React.FC = () => {
                     activeIndex === idx ? 'opacity-100 scale-100' : 'opacity-0 scale-110'
                   }`}
                 >
-                  {/* Ken Burns Effect - Slow Zoom & Pan */}
-                  <div className={`w-full h-full ${activeIndex === idx ? 'animate-ken-burns' : ''}`}>
+                  {/* Image */}
+                  <div className="w-full h-full">
                     <img
                       src={img.url}
                       alt={img.label}
                       className="w-full h-full object-cover"
-                      style={{
-                        filter: 'contrast(1.1) saturate(1.2)',
-                      }}
                       loading="lazy"
                     />
                   </div>
@@ -274,15 +226,6 @@ const Hero: React.FC = () => {
       </ScrollAnimation>
 
       <style>{`
-        @keyframes ken-burns {
-          0% {
-            transform: scale(1) translateX(0) translateY(0);
-          }
-          100% {
-            transform: scale(1.1) translateX(-3%) translateY(-2%);
-          }
-        }
-
         @keyframes gradient-rotate {
           0% {
             background-position: 0% 50%;
@@ -293,14 +236,6 @@ const Hero: React.FC = () => {
           100% {
             background-position: 0% 50%;
           }
-        }
-
-        .perspective-1000 {
-          perspective: 1000px;
-        }
-
-        .animate-ken-burns {
-          animation: ken-burns 20s ease-in-out infinite alternate;
         }
       `}</style>
     </section>

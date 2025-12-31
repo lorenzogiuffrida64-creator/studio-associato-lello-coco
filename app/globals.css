@@ -7,6 +7,18 @@ body {
   background-color: #050505;
   color: #ffffff;
   overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Performance optimizations */
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+img, video {
+  transform: translateZ(0);
+  backface-visibility: hidden;
 }
 
 .font-serif {
@@ -24,9 +36,11 @@ body {
 
 .glass {
   background: rgba(255, 255, 255, 0.03);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   border: 1px solid rgba(255, 255, 255, 0.1);
+  transform: translateZ(0);
+  will-change: auto;
 }
 
 /* Beam Glow Effect */

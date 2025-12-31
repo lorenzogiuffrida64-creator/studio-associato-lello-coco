@@ -110,7 +110,7 @@ const Contact: React.FC = () => {
           <ScrollAnimation direction="right" delay={0.1}>
           {/* Form Side */}
           <div className="relative">
-            <div className="absolute -inset-4 bg-gradient-to-br from-purple-600/10 to-transparent blur-2xl md:blur-3xl opacity-50 rounded-full"></div>
+            <div className="absolute -inset-4 bg-gradient-to-br from-purple-600/10 to-transparent blur-xl opacity-40 rounded-full"></div>
 
             <div className="relative glass p-6 md:p-10 lg:p-12 rounded-[32px] md:rounded-[40px] lg:rounded-[48px] border-white/10 shadow-2xl">
               {status === 'success' ? (
@@ -157,7 +157,7 @@ const Contact: React.FC = () => {
                         value={formData.name}
                         onChange={handleChange}
                         placeholder="Mario Rossi"
-                        className="bg-white/5 border border-white/10 rounded-xl md:rounded-2xl px-4 md:px-6 py-3 md:py-4 focus:outline-none focus:border-purple-500/50 focus:ring-1 focus:ring-purple-500/30 transition-all text-white placeholder:text-white/10 text-sm md:text-base"
+                        className="bg-white/5 border border-white/10 rounded-xl md:rounded-2xl px-4 md:px-6 py-3 md:py-4 focus:outline-none focus:border-purple-500/50 text-white placeholder:text-white/10 text-sm md:text-base"
                       />
                     </div>
                     <div className="flex flex-col gap-2">
@@ -169,7 +169,7 @@ const Contact: React.FC = () => {
                         value={formData.email}
                         onChange={handleChange}
                         placeholder="mario@esempio.it"
-                        className="bg-white/5 border border-white/10 rounded-xl md:rounded-2xl px-4 md:px-6 py-3 md:py-4 focus:outline-none focus:border-purple-500/50 focus:ring-1 focus:ring-purple-500/30 transition-all text-white placeholder:text-white/10 text-sm md:text-base"
+                        className="bg-white/5 border border-white/10 rounded-xl md:rounded-2xl px-4 md:px-6 py-3 md:py-4 focus:outline-none focus:border-purple-500/50 text-white placeholder:text-white/10 text-sm md:text-base"
                       />
                     </div>
                   </div>
@@ -183,7 +183,7 @@ const Contact: React.FC = () => {
                       value={formData.subject}
                       onChange={handleChange}
                       placeholder="Consulenza Fiscale Impresa"
-                      className="bg-white/5 border border-white/10 rounded-xl md:rounded-2xl px-4 md:px-6 py-3 md:py-4 focus:outline-none focus:border-purple-500/50 focus:ring-1 focus:ring-purple-500/30 transition-all text-white placeholder:text-white/10 text-sm md:text-base"
+                      className="bg-white/5 border border-white/10 rounded-xl md:rounded-2xl px-4 md:px-6 py-3 md:py-4 focus:outline-none focus:border-purple-500/50 text-white placeholder:text-white/10 text-sm md:text-base"
                     />
                   </div>
 
@@ -196,25 +196,14 @@ const Contact: React.FC = () => {
                       value={formData.message}
                       onChange={handleChange}
                       placeholder="Come possiamo aiutarti?"
-                      className="bg-white/5 border border-white/10 rounded-[20px] md:rounded-[28px] px-4 md:px-6 py-3 md:py-4 focus:outline-none focus:border-purple-500/50 focus:ring-1 focus:ring-purple-500/30 transition-all text-white placeholder:text-white/10 resize-none text-sm md:text-base"
+                      className="bg-white/5 border border-white/10 rounded-[20px] md:rounded-[28px] px-4 md:px-6 py-3 md:py-4 focus:outline-none focus:border-purple-500/50 text-white placeholder:text-white/10 resize-none text-sm md:text-base"
                     ></textarea>
                   </div>
 
                   <button
                     disabled={status === 'submitting'}
                     type="submit"
-                    className="group mt-2 md:mt-4 relative w-full py-3.5 md:py-5 bg-white text-black rounded-xl md:rounded-2xl font-bold flex items-center justify-center gap-2 md:gap-3 transition-all hover:scale-[1.02] active:scale-95 disabled:opacity-70 disabled:scale-100 disabled:hover:shadow-none text-sm md:text-base"
-                    style={{
-                      boxShadow: 'none'
-                    }}
-                    onMouseEnter={(e) => {
-                      if (status !== 'submitting') {
-                        e.currentTarget.style.boxShadow = '0 0 0 2px #a855f7, 0 0 20px rgba(168, 85, 247, 0.6)';
-                      }
-                    }}
-                    onMouseLeave={(e) => {
-                      e.currentTarget.style.boxShadow = 'none';
-                    }}
+                    className="group mt-2 md:mt-4 relative w-full py-3.5 md:py-5 bg-white text-black rounded-xl md:rounded-2xl font-bold flex items-center justify-center gap-2 md:gap-3 hover:scale-[1.02] active:scale-95 disabled:opacity-70 disabled:scale-100 text-sm md:text-base hover:shadow-[0_0_0_2px_#a855f7,0_0_20px_rgba(168,85,247,0.6)] transition-shadow"
                   >
                     {status === 'submitting' ? (
                       <>
